@@ -5,7 +5,6 @@ using My_Expenses.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace My_Expenses.Services
 {
@@ -122,53 +121,6 @@ namespace My_Expenses.Services
             product.Prize = newPrize;
             productRepository.Update(product);
         }
-
-        public List<Product> FilterByMonth(int noOfMonths, string category, int userId)
-        {
-            var allProducts = productRepository.GetAllByUserId(userId)
-                .Where(x => x.DateAdded > DateTime.Now.AddMonths(-noOfMonths))
-                .ToList();
-            var filteredList = allProducts;
-            if (category != "all")
-            {
-                filteredList = allProducts
-                .Where(x => x.Category == category)
-                .ToList();
-            }
-            return filteredList;
-        }
-
-        public List<Product> FilterByWeek(int noOfWeeks, string category, int userId)
-        {
-            noOfWeeks *= 7;
-            var allProducts = productRepository.GetAllByUserId(userId)
-                .Where(x => x.DateAdded > DateTime.Now.AddDays(-noOfWeeks))
-                .ToList();
-            var filteredList = allProducts;
-            if (category != "all")
-            {
-                filteredList = allProducts
-                .Where(x => x.Category == category)
-                .ToList();
-            }
-            return filteredList;
-        }
-
-        public List<Product> FilterByDay(int noOfDays, string category, int userId)
-        {
-            var allProducts = productRepository.GetAllByUserId(userId)
-                .Where(x => x.DateAdded > DateTime.Now.AddDays(-noOfDays))
-                .ToList();
-            var filteredList = allProducts;
-            if (category != "all")
-            {
-                filteredList = allProducts
-                .Where(x => x.Category == category)
-                .ToList();
-            }
-            return filteredList;
-        }
-
         public List<Product> FilterByTime(string time, int value, string category, int userId)
         {
             if (time == "month")

@@ -2,7 +2,6 @@
 using My_Expenses.Services.Dto;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace My_Expenses.Services.Interfaces
 {
@@ -16,9 +15,6 @@ namespace My_Expenses.Services.Interfaces
         CalculatedData CalculateData(List<Product> products);
         List<Product> CustomFiltering(string category, DateTime dateFrom, DateTime dateTo, int prizeFrom, int prizeTo, int userId);
         CustomFilterValidation ValidateCustomFilter(DateTime dateFrom, DateTime dateTo, int prizeFrom, int prizeTo, int userId);
-        List<Product> FilterByMonth(int noOfMonths, string category, int userId);
-        List<Product> FilterByWeek(int noOfWeeks, string category, int userId);
-        List<Product> FilterByDay(int noOfDays, string category, int userId);
         List<Product> FilterByTime(string time, int value, string category, int userId);
     }
 }
