@@ -7,7 +7,7 @@
     <link href="~/css/DefaultForm/form.css" rel="stylesheet" />
 }
 <header class="formHeader">
-    <h3>Welcome !</h3>
+    <h3>Just one ste away</h3>
     <h5>All inputs are required</h5>
 </header>
 
@@ -19,6 +19,9 @@
         <input placeholder="Email adress" class="form-control" asp-for="@Model.EmailAdress" />
         <input type="submit" value="Register" class="btn btn-dark form-control" />
     </form>
+    <div class="registerLinkContainer">
+        <p>Back to <a asp-action="SignIn">Sign in</a></p>
+    </div>
     <div class="text-danger" asp-validation-summary="All"></div>
 </div>
 

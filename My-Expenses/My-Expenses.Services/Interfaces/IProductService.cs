@@ -16,5 +16,6 @@ namespace My_Expenses.Services.Interfaces
         CalculatedData CalculateData(List<Product> products);
         List<Product> CustomFiltering(string category, DateTime dateFrom, DateTime dateTo, int prizeFrom, int prizeTo, int userId);
         CustomFilterValidation ValidateCustomFilter(DateTime dateFrom, DateTime dateTo, int prizeFrom, int prizeTo, int userId);
+        List<Product> FilterByMonth(int noOfMonths, int userId);
     }
 }

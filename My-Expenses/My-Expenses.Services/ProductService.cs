@@ -120,6 +120,12 @@ namespace My_Expenses.Services
             productRepository.Update(product);
         }
 
-        
+        public List<Product> FilterByMonth(int noOfMonths, int userId)
+        {
+            var allProducts = productRepository.GetAllByUserId(userId);
+            allProducts = allProducts.Where(x => x.DateAdded > DateTime.Now.AddMonths(-noOfMonths)).ToList();
+            return allProducts;
+        }
+
     }
 }

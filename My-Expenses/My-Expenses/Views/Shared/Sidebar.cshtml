@@ -4,24 +4,54 @@
         <h3 class="sidebarHeader">Filter products</h3>
         <div class="sidebarContentContainer">
 
-            <div class="formContainer">
-                <div class="dropDownMenu" onclick="ToggleForm(`formByName`)">
+            <div class="optionContainer">
+
+                <div class="dropDownMenu" onclick="ToggleForm(`customFilterForm`)">
                     <h5>Custom filter <i class='fas fa-caret-down' style='font-size:24px'></i></h5>
                 </div>
-                <form class="filterForm" id="formByName" asp-controller="Product" asp-action="CustomFilter">
+
+                <form class="filterForm" id="customFilterForm" asp-controller="Product" asp-action="CustomFilter">
+
+                    <span class="text-light">Category</span>
                     <select id="category" name="category" class="form-control">
                         <option value="all">All categories</option>
                         <option value="Food and Drinks">Food and drinks</option>
                         <option value="Bills">Bills</option>
                         <option value="Clothing">Clothing</option>
                         <option value="Other">Other</option>
+
                     </select>
+
+                    <span class="text-light">Date from</span>
                     <input type="date" class="form-control" id="dateFrom" name="dateFrom" required />
+                    <span class="text-light">Date to</span>
                     <input type="date" class="form-control" id="dateTo" name="dateTo" required />
-                    <input type="number" placeholder="Minimum prize" class="form-control" id="prizeFrom" name="prizeFrom" required />
-                    <input type="number" placeholder="Maximum prize" class="form-control" id="prizeTo" name="prizeTo" required />
+                    <span class="text-light">Minimum prize</span>
+                    <input type="number" class="form-control" id="prizeFrom" name="prizeFrom" required />
+                    <span class="text-light">Maximum prize</span>
+                    <input type="number" class="form-control" id="prizeTo" name="prizeTo" required />
+
+                    <input type="submit" class="btn btn-outline-success form-control" value="Filter" />
+
+                </form>
+            </div>
+
+            <div class="optionContainer">
+
+                <div class="dropDownMenu" onclick="ToggleForm(`formByMonth`)">
+                    <h5>By months <i class='fas fa-caret-down' style='font-size:24px'></i></h5>
+                </div>
+
+                <form class="filterForm" id="formByMonth" asp-controller="Product" asp-action="ByMonth">
+                    <select id="noOfMonths" name="noOfMonths" class="form-control">
+                        <option value="4">Last 4 months</option>
+                        <option value="3">Last 3 months</option>
+                        <option value="2">Last 2 months</option>
+                        <option value="1">Last month</option>
+                    </select>
                     <input type="submit" class="btn btn-outline-success form-control" value="Filter" />
                 </form>
+
             </div>
 
         </div>
