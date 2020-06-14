@@ -10,6 +10,7 @@
                     <h5>Custom filter <i class='fas fa-caret-down' style='font-size:24px'></i></h5>
                 </div>
 
+                @*Custom filter -----------------------------------------------------------*@
                 <form class="filterForm" id="customFilterForm" asp-controller="Product" asp-action="CustomFilter">
 
                     <span class="text-light">Category</span>
@@ -19,7 +20,6 @@
                         <option value="Bills">Bills</option>
                         <option value="Clothing">Clothing</option>
                         <option value="Other">Other</option>
-
                     </select>
 
                     <span class="text-light">Date from</span>
@@ -30,12 +30,13 @@
                     <input type="number" class="form-control" id="prizeFrom" name="prizeFrom" required />
                     <span class="text-light">Maximum prize</span>
                     <input type="number" class="form-control" id="prizeTo" name="prizeTo" required />
-
+                    
                     <input type="submit" class="btn btn-outline-success form-control" value="Filter" />
 
                 </form>
             </div>
 
+            @*By month -----------------------------------------------------------*@
             <div class="optionContainer">
 
                 <div class="dropDownMenu" onclick="ToggleForm(`formByMonth`)">
@@ -49,11 +50,75 @@
                         <option value="2">Last 2 months</option>
                         <option value="1">Last month</option>
                     </select>
+                    <select id="category" name="category" class="form-control">
+                        <option value="all">All categories</option>
+                        <option value="Food and Drinks">Food and drinks</option>
+                        <option value="Bills">Bills</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input type="hidden" id="time" name="time" value="month" />
+
                     <input type="submit" class="btn btn-outline-success form-control" value="Filter" />
                 </form>
 
             </div>
 
+            @*By weeks -----------------------------------------------------------*@
+            <div class="optionContainer">
+
+                <div class="dropDownMenu" onclick="ToggleForm(`formByWeek`)">
+                    <h5>By weeks <i class='fas fa-caret-down' style='font-size:24px'></i></h5>
+                </div>
+
+                <form class="filterForm" id="formByWeek" asp-controller="Product" asp-action="ByWeek">
+                    <select id="noOfWeeks" name="noOfWeeks" class="form-control">
+                        <option value="4">Last 4 weeks</option>
+                        <option value="3">Last 3 weeks</option>
+                        <option value="2">Last 2 weeks</option>
+                        <option value="1">Last weeks</option>
+                    </select>
+                    <select id="category" name="category" class="form-control">
+                        <option value="all">All categories</option>
+                        <option value="Food and Drinks">Food and drinks</option>
+                        <option value="Bills">Bills</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input type="hidden" id="time" name="time" value="week" />
+
+                    <input type="submit" class="btn btn-outline-success form-control" value="Filter" />
+                </form>
+
+            </div>
+
+            @*By days -----------------------------------------------------------*@
+            <div class="optionContainer">
+
+                <div class="dropDownMenu" onclick="ToggleForm(`formByDay`)">
+                    <h5>By days <i class='fas fa-caret-down' style='font-size:24px'></i></h5>
+                </div>
+
+                <form class="filterForm" id="formByDay" asp-controller="Product" asp-action="ByDay">
+                    <select id="noOfDays" name="noOfDays" class="form-control">
+                        <option value="4">Last 4 days</option>
+                        <option value="3">Last 3 days</option>
+                        <option value="2">Last 2 days</option>
+                        <option value="1">Last day</option>
+                    </select>
+                    <select id="category" name="category" class="form-control">
+                        <option value="all">All categories</option>
+                        <option value="Food and Drinks">Food and drinks</option>
+                        <option value="Bills">Bills</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input type="hidden" id="time" name="time" value="day" />
+
+                    <input type="submit" class="btn btn-outline-success form-control" value="Filter" />
+                </form>
+
+            </div>
         </div>
     </div>
 </div>

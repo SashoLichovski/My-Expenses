@@ -22,15 +22,18 @@ namespace My_Expenses.Services
         {
             var totalAmount = 0;
             products.ForEach(x => totalAmount += x.Prize);
-
-            DateTime startingDate = products.Min(x => x.DateAdded);
-            DateTime latestDate = products.Max(x => x.DateAdded);
-            return new CalculatedData()
+            if (products.Count > 0)
             {
-                TotalAmount = totalAmount,
-                DateFrom = startingDate.ToString("dddd, MMMM dd, yyyy"),
-                DateTo = latestDate.ToString("dddd, MMMM dd, yyyy")
-            };
+                DateTime startingDate = products.Min(x => x.DateAdded);
+                DateTime latestDate = products.Max(x => x.DateAdded);
+                return new CalculatedData()
+                {
+                    TotalAmount = totalAmount,
+                    DateFrom = startingDate.ToString("dddd, MMMM dd, yyyy"),
+                    DateTo = latestDate.ToString("dddd, MMMM dd, yyyy")
+                };
+            }
+            return new CalculatedData();
         }
 
         public void CreateProduct(Product product, int userId)
@@ -120,12 +123,97 @@ namespace My_Expenses.Services
             productRepository.Update(product);
         }
 
-        public List<Product> FilterByMonth(int noOfMonths, int userId)
+        public List<Product> FilterByMonth(int noOfMonths, string category, int userId)
         {
-            var allProducts = productRepository.GetAllByUserId(userId);
-            allProducts = allProducts.Where(x => x.DateAdded > DateTime.Now.AddMonths(-noOfMonths)).ToList();
-            return allProducts;
+            var allProducts = productRepository.GetAllByUserId(userId)
+                .Where(x => x.DateAdded > DateTime.Now.AddMonths(-noOfMonths))
+                .ToList();
+            var filteredList = allProducts;
+            if (category != "all")
+            {
+                filteredList = allProducts
+                .Where(x => x.Category == category)
+                .ToList();
+            }
+            return filteredList;
         }
 
+        public List<Product> FilterByWeek(int noOfWeeks, string category, int userId)
+        {
+            noOfWeeks *= 7;
+            var allProducts = productRepository.GetAllByUserId(userId)
+                .Where(x => x.DateAdded > DateTime.Now.AddDays(-noOfWeeks))
+                .ToList();
+            var filteredList = allProducts;
+            if (category != "all")
+            {
+                filteredList = allProducts
+                .Where(x => x.Category == category)
+                .ToList();
+            }
+            return filteredList;
+        }
+
+        public List<Product> FilterByDay(int noOfDays, string category, int userId)
+        {
+            var allProducts = productRepository.GetAllByUserId(userId)
+                .Where(x => x.DateAdded > DateTime.Now.AddDays(-noOfDays))
+                .ToList();
+            var filteredList = allProducts;
+            if (category != "all")
+            {
+                filteredList = allProducts
+                .Where(x => x.Category == category)
+                .ToList();
+            }
+            return filteredList;
+        }
+
+        public List<Product> FilterByTime(string time, int value, string category, int userId)
+        {
+            if (time == "month")
+            {
+                var allProducts = productRepository.GetAllByUserId(userId)
+                .Where(x => x.DateAdded > DateTime.Now.AddMonths(-value))
+                .ToList();
+                var filteredList = allProducts;
+                if (category != "all")
+                {
+                    filteredList = allProducts
+                    .Where(x => x.Category == category)
+                    .ToList();
+                }
+                return filteredList;
+            }
+            else if (time == "week")
+            {
+                value *= 7;
+                var allProducts = productRepository.GetAllByUserId(userId)
+                    .Where(x => x.DateAdded > DateTime.Now.AddDays(-value))
+                    .ToList();
+                var filteredList = allProducts;
+                if (category != "all")
+                {
+                    filteredList = allProducts
+                    .Where(x => x.Category == category)
+                    .ToList();
+                }
+                return filteredList;
+            }
+            else 
+            {
+                var allProducts = productRepository.GetAllByUserId(userId)
+                .Where(x => x.DateAdded > DateTime.Now.AddDays(-value))
+                .ToList();
+                var filteredList = allProducts;
+                if (category != "all")
+                {
+                    filteredList = allProducts
+                    .Where(x => x.Category == category)
+                    .ToList();
+                }
+                return filteredList;
+            }
+        }
     }
 }

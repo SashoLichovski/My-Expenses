@@ -50,10 +50,42 @@ namespace My_Expenses.Controllers
             dataModel.ErrorMessage = isValid.NotValidMessage;
             return View(dataModel);
         }
-        public IActionResult ByMonth(int noOfMonths)
+        public IActionResult ByMonth(string time ,int noOfMonths, string category)
         {
             var userId = int.Parse(User.FindFirst("Id").Value);
-            var products = productService.FilterByMonth(noOfMonths, userId);
+
+            var products = productService.FilterByTime(time, noOfMonths, category, userId);
+
+            var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
+            var calculationData = productService.CalculateData(products);
+
+            var dataModel = new HomePageCalculatedDataModel()
+            {
+                Products = convertedList,
+                Data = ConvertTo.CalculatedDataModel(calculationData)
+            };
+            return View(dataModel);
+        }
+        public IActionResult ByWeek(string time, int noOfWeeks, string category)
+        {
+            var userId = int.Parse(User.FindFirst("Id").Value);
+            var products = productService.FilterByTime(time, noOfWeeks, category, userId);
+
+            var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
+            var calculationData = productService.CalculateData(products);
+
+            var dataModel = new HomePageCalculatedDataModel()
+            {
+                Products = convertedList,
+                Data = ConvertTo.CalculatedDataModel(calculationData)
+            };
+            return View(dataModel);
+        }
+        public IActionResult ByDay(string time, int noOfDays, string category)
+        {
+            var userId = int.Parse(User.FindFirst("Id").Value);
+
+            var products = productService.FilterByTime(time, noOfDays, category, userId);
 
             var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
             var calculationData = productService.CalculateData(products);

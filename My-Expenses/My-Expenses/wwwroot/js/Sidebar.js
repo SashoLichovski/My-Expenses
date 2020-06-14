@@ -13,6 +13,12 @@ function ToggleSidebar() {
     if (document.getElementById("formByMonth").style.display == "block") {
         document.getElementById("formByMonth").style.display = "none"
     }
+    if (document.getElementById("formByWeek").style.display == "block") {
+        document.getElementById("formByWeek").style.display = "none"
+    }
+    if (document.getElementById("formByDay").style.display == "block") {
+        document.getElementById("formByDay").style.display = "none"
+    }
 }
 
 var customFilterForm = document.getElementById("customFilterForm");
@@ -21,6 +27,11 @@ customFilterForm.style.display = "none";
 var formByMonth = document.getElementById("formByMonth");
 formByMonth.style.display = "none";
 
+var formByWeek = document.getElementById("formByWeek");
+formByWeek.style.display = "none";
+
+var formByWeek = document.getElementById("formByDay");
+formByWeek.style.display = "none";
 
 function ToggleForm(id) {
     var form = document.getElementById(id);
