@@ -1,0 +1,22 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+@section Styles{
+    <style>
+        #msgContainer {
+            width: 60%;
+            margin: auto;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #msgContainer h2, a{
+            padding: 20px;
+        }
+    </style>
+}
+<div id="msgContainer">
+    <h2>You have been successfully registered !</h2>
+    <a asp-action="SignIn">Proceed to sign in</a>
+</div>
+

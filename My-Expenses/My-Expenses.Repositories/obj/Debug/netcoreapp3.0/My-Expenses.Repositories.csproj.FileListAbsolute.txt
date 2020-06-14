@@ -1,0 +1,13 @@
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\bin\Debug\netcoreapp3.0\My-Expenses.Repositories.deps.json
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\bin\Debug\netcoreapp3.0\My-Expenses.Repositories.runtimeconfig.json
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\bin\Debug\netcoreapp3.0\My-Expenses.Repositories.runtimeconfig.dev.json
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\bin\Debug\netcoreapp3.0\My-Expenses.Repositories.dll
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\bin\Debug\netcoreapp3.0\My-Expenses.Repositories.pdb
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\bin\Debug\netcoreapp3.0\My-Expenses.Data.dll
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\bin\Debug\netcoreapp3.0\My-Expenses.Data.pdb
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\obj\Debug\netcoreapp3.0\My-Expenses.Repositories.csprojAssemblyReference.cache
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\obj\Debug\netcoreapp3.0\My-Expenses.Repositories.AssemblyInfoInputs.cache
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\obj\Debug\netcoreapp3.0\My-Expenses.Repositories.AssemblyInfo.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\obj\Debug\netcoreapp3.0\My-Expenses.Repositories.csproj.CopyComplete
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\obj\Debug\netcoreapp3.0\My-Expenses.Repositories.dll
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses.Repositories\obj\Debug\netcoreapp3.0\My-Expenses.Repositories.pdb

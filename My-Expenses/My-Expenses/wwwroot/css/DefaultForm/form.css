@@ -1,0 +1,13 @@
+﻿.formContainer{
+    width: 30%;
+    margin: auto;
+}
+.formContainer input, select{
+    margin-top: 15px;
+}
+.formHeader {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    padding: 15px;
+}

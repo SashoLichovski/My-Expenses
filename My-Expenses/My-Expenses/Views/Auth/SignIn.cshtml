@@ -1,0 +1,25 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model My_Expenses.ViewModels.AuthModels.SignInModel
+@{
+    Layout = "_Layout";
+}
+@section Styles {
+    <link href="~/css/DefaultForm/form.css" rel="stylesheet" />
+    <link href="~/css/Auth/SignIn.css" rel="stylesheet" />
+}
+<header class="formHeader">
+    <h3>Welcome !</h3>
+    <h3>Please sign in to use My Expenses</h3>
+</header>
+
+<div class="formContainer">
+    <form asp-action="SignIn">
+        <input placeholder="Username" class="form-control" asp-for="@Model.Username" />
+        <input placeholder="Password" type="password" class="form-control" asp-for="@Model.Password" />
+        <input type="submit" value="Sign in" class="btn btn-dark form-control" />
+    </form>
+    <div class="registerLinkContainer">
+        <p>If you don't have an account, please <a asp-action="Register">Register</a></p>
+    </div>
+    <div class="text-danger" asp-validation-summary="All"></div>
+</div>

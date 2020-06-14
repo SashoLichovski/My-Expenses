@@ -2,12 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using My_Expenses.Data;
+using My_Expenses.Repositories;
+using My_Expenses.Repositories.Interfaces;
+using My_Expenses.Services;
+using My_Expenses.Services.Interfaces;
 
 namespace My_Expenses
 {
@@ -24,6 +31,25 @@ namespace My_Expenses
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<MyExpensesContext>(options =>
+                options.UseSqlServer("Data Source=.\\sqlexpress; Initial Catalog=MyExpensesDb; Integrated Security=true;"));
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/auth/signin";
+            });
+
+            services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,12 +71,13 @@ namespace My_Expenses
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Auth}/{action=SignIn}/{id?}");
             });
         }
     }

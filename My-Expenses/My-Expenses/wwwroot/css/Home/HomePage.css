@@ -1,0 +1,32 @@
+﻿.contentContainer{
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+}
+.addBtn {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.homePageTable{
+    width: 99%;
+    margin: auto;
+}
+.homePageTable td, th{
+    padding: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+    font-size: 1.1em;
+}
+.homePageTable tr th {
+    position: relative;
+    color: whitesmoke;
+    background-color: #343a40;
+}
+.homePageTable tr:hover {
+    color: whitesmoke;
+    background-color: #343a40;
+}
+.scrollContainer {
+    height: 500px;
+    overflow: auto;
+    border-bottom: 1px solid #343a40;
+}
