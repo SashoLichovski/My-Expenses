@@ -2,8 +2,9 @@
 
 namespace My_Expenses.ViewModels.ProductModels
 {
-    public class AddProductModel
+    public class EditProductModel
     {
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

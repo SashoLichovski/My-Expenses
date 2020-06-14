@@ -41,5 +41,11 @@ namespace My_Expenses.Repositories
         {
             return context.Products.FirstOrDefault(x => x.Id == id);
         }
+
+        public void Update(Product product)
+        {
+            context.Products.Update(product);
+            context.SaveChanges();
+        }
     }
 }

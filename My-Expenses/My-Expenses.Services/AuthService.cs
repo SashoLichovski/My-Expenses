@@ -29,7 +29,8 @@ namespace My_Expenses.Services
                 {
                     new Claim(ClaimTypes.NameIdentifier, getUser.Username),
                     new Claim(ClaimTypes.Name, getUser.Username),
-                    new Claim("Id", getUser.Id.ToString())
+                    new Claim("Id", getUser.Id.ToString()),
+                    new Claim("IsLoggedIn", "True")
                 };
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);

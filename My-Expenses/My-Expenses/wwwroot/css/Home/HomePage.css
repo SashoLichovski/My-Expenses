@@ -3,11 +3,10 @@
     margin: auto;
     padding: 10px;
 }
-.addBtn {
-    margin-bottom: 20px;
-    margin-top: 20px;
+.addBtn{
+    margin: 20px;
 }
-.homePageTable{
+.homePageTable {
     width: 99%;
     margin: auto;
 }
@@ -29,4 +28,8 @@
     height: 500px;
     overflow: auto;
     border-bottom: 1px solid #343a40;
+}
+.totalAmountContainer{
+    margin-top: 50px;
+    text-align: center;
 }

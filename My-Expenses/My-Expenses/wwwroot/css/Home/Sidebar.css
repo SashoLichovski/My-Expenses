@@ -1,0 +1,36 @@
+﻿.positionRight {
+    display: flex;
+    justify-content: flex-end;
+}
+#sidebarContainer {
+    position: absolute;
+    z-index: 1;
+    width: 300px;
+    height: 500px;
+    transition: top 0.6s;
+    background-color: #343a40;
+}
+.filterForm{
+    text-align: center;
+}
+.sidebarHeader {
+    color: whitesmoke;
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(51, 43, 43);
+}
+.dropDownMenu{
+    padding: 10px 5px;
+    text-align: center;
+    color: whitesmoke;
+    cursor: pointer;
+}
+#formByName .form-control {
+    width: 60% !important;
+    margin: auto !important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+.formContainer {
+    border-bottom: 1px solid rgba(0,0,0,0.6);
+}

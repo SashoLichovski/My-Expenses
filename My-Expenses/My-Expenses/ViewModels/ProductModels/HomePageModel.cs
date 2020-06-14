@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace My_Expenses.ViewModels.ProductModels
+﻿namespace My_Expenses.ViewModels.ProductModels
 {
     public class HomePageModel
     {

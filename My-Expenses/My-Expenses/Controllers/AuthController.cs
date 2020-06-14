@@ -23,7 +23,7 @@ namespace My_Expenses.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> SignIn(SignInModel model)
+        public async Task<IActionResult> SignIn(SignInModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -31,6 +31,10 @@ namespace My_Expenses.Controllers
                 var isValid = await AuthService.SignInAsync(converted, HttpContext);
                 if (isValid)
                 {
+                    if (!String.IsNullOrEmpty(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
                     return RedirectToAction("HomePage", "Product");
                 }
                 ModelState.AddModelError(string.Empty, "Wrong username or password");

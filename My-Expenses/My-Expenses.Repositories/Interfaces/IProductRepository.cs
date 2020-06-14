@@ -11,5 +11,6 @@ namespace My_Expenses.Repositories.Interfaces
         List<Product> GetAllByUserId(int userId);
         Product GetById(int id);
         void DeleteProduct(Product product);
+        void Update(Product product);
     }
 }

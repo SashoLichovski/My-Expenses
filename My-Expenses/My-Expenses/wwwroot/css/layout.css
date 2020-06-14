@@ -4,3 +4,13 @@
 .collapse div, ul{
     margin-right: 10px;
 }
+#sidebarToggler{
+    cursor: pointer
+}
+#sidebarToggler div{
+    padding: 2px 0;
+    background-color: whitesmoke;
+    width: 30px;
+    margin: 5px 0;
+    border-radius: 2px;
+}

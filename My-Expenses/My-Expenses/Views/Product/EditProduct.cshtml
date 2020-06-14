@@ -1,27 +1,29 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model My_Expenses.ViewModels.ProductModels.AddProductModel
+@model My_Expenses.ViewModels.ProductModels.EditProductModel
 @{
     Layout = "_Layout";
 }
-@section Styles{ 
+@section Styles{
     <link rel="stylesheet" href="~/css/DefaultForm/form.css" />
 }
 <header class="formHeader">
-    <h3>Define you product</h3>
+    <h3>Edit your product</h3>
     <h5>All inputs are required</h5>
 </header>
 
 <div class="formContainer">
-    <form asp-action="AddProduct">
+    <form asp-action="EditProduct">
+        <input type="hidden" asp-for="@Model.Id" />
         <input class="form-control" placeholder="Product name" asp-for="@Model.Name" />
         <input class="form-control" type="number" placeholder="Prize" asp-for="@Model.Prize" />
-        <select id="category" name="Category" class="form-control" asp-for="@Model.Category" >
+        <select id="category" name="Category" class="form-control" asp-for="@Model.Category">
             <option value="Food and Drinks">Food and drinks</option>
             <option value="Bills">Bills</option>
             <option value="Clothing">Clothing</option>
             <option value="Other">Other</option>
         </select>
-        <input type="submit" value="Add product" class="btn btn-dark form-control" />
+        <input type="submit" value="Save" class="btn btn-dark form-control" />
         <div asp-validation-summary="All"></div>
     </form>
 </div>
+

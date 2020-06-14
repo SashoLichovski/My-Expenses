@@ -46,6 +46,12 @@ namespace My_Expenses
                 options.LoginPath = "/auth/signin";
             });
 
+            services.AddAuthorization(options =>
+            options.AddPolicy(
+                "IsLoggedIn",
+                    policy => policy.RequireClaim("IsLoggedIn", "True")
+                ));
+
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IUserRepository, UserRepository>();
