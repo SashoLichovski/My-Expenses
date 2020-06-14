@@ -1,0 +1,30 @@
+﻿@model My_Expenses.ViewModels.ProductModels.HomePageCalculatedDataModel
+
+<div class="scrollContainer">
+    <table class="homePageTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Prize</th>
+                <th>Date added</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in @Model.Products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Prize den.</td>
+                    <td>@product.DateCreated</td>
+                    <td>@product.Category</td>
+                    <td>
+                        <a asp-action="EditProduct" asp-route-id="@product.Id">Edit</a> |
+                        <a asp-action="RemoveProduct" asp-route-id="@product.Id" onclick="return confirm(`Confirm delete action`)">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

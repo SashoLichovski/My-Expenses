@@ -1,0 +1,20 @@
+﻿@model My_Expenses.ViewModels.ProductModels.HomePageCalculatedDataModel
+
+<div class="totalAmountContainer">
+    <table class="homePageTable">
+        <thead>
+            <tr>
+                <th>Total</th>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Data.TotalAmount den.</td>
+                <td>@Model.Data.DateFrom</td>
+                <td>@Model.Data.DateTo</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

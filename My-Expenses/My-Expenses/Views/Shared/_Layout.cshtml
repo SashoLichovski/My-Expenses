@@ -29,6 +29,12 @@
                             <a class="dropdown-item" asp-controller="Auth" asp-action="SignOut">Sign out</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a asp-controller="Product" asp-action="HomePage" class="nav-link text-light">All products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Product" asp-action="AddProduct" class="btn btn-outline-success">Add product</a>
+                    </li>
                 </ul>
                 <div class="text-light" id="sidebarToggler" onclick="ToggleSidebar()">
                     <div></div>
@@ -38,6 +44,8 @@
             </div>
         }
     </nav>
+
+    <h4 id="viewbagHeader">@ViewBag.header</h4>
 
     <main>
         @RenderBody()

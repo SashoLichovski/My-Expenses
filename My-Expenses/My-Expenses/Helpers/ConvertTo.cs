@@ -10,7 +10,7 @@ namespace My_Expenses.Helpers
 {
     public static class ConvertTo
     {
-        internal static HomePageModel ToHomePageModel(Product product)
+        internal static HomePageModel HomePageModel(Product product)
         {
             return new HomePageModel
             {

@@ -19,10 +19,11 @@ namespace My_Expenses.Controllers
         }
         public IActionResult HomePage()
         {
+            ViewBag.header = "All products";
             var userId = int.Parse(User.FindFirst("Id").Value);
             var products = productService.GetAllByUserId(userId);
+            var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
             var calculationData = productService.CalculateData(products);
-            var convertedList = products.Select(x => ConvertTo.ToHomePageModel(x)).ToList();
             var dataModel = new HomePageCalculatedDataModel()
             {
                 Products = convertedList,
@@ -30,7 +31,25 @@ namespace My_Expenses.Controllers
             };
             return View(dataModel);
         }
+        public IActionResult CustomFilter(string category, DateTime dateFrom, DateTime dateTo, int prizeFrom, int prizeTo)
+        {
+            var userId = int.Parse(User.FindFirst("Id").Value);
 
+            var isValid = productService.ValidateCustomFilter(dateFrom, dateTo, prizeFrom, prizeTo, userId);
+            var dataModel = new HomePageCalculatedDataModel();
+            if (isValid.IsValid)
+            {
+                ViewBag.header = "Custom filter";
+                var products = productService.CustomFiltering(category, dateFrom, dateTo, prizeFrom, prizeTo, userId);
+                var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
+                var calculationData = productService.CalculateData(products);
+                dataModel.Products = convertedList;
+                dataModel.Data = ConvertTo.CalculatedDataModel(calculationData);
+                return View(dataModel);
+            }
+            dataModel.ErrorMessage = isValid.NotValidMessage;
+            return View(dataModel);
+        }
         public IActionResult AddProduct()
         {
             var model = new AddProductModel();

@@ -4,7 +4,7 @@
     padding: 10px;
 }
 .addBtn{
-    margin: 20px;
+    margin: 20px 10px;
 }
 .homePageTable {
     width: 99%;
@@ -30,6 +30,5 @@
     border-bottom: 1px solid #343a40;
 }
 .totalAmountContainer{
-    margin-top: 50px;
     text-align: center;
 }

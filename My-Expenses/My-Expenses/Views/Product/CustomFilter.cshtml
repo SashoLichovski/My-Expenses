@@ -7,18 +7,23 @@
     <link rel="stylesheet" href="~/css/Home/HomePage.css" />
     <link rel="stylesheet" href="~/css/Home/Sidebar.css" />
 }
-
 <partial name="Sidebar" />
 
 <div class="contentContainer">
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <p>@Model.ErrorMessage</p>
+        <a asp-action="HomePage">Back to all products</a>
+    }
+    else
+    {
+        <partial name="CalculatedInfoTable" />
 
-    <partial name="CalculatedInfoTable" />
-
-    <partial name="DisplayProducts" />
-
+        <partial name="DisplayProducts" />
+    }
 </div>
 
-@section Scripts{ 
+@section Scripts{
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="~/js/Sidebar.js"></script>
 }
