@@ -13,8 +13,9 @@ namespace My_Expenses.Services.Interfaces
         void DeleteProduct(Product product);
         void UpdateProduct(Product product, string newName, string newCategory, int newPrize);
         CalculatedData CalculateData(List<Product> products);
-        List<Product> CustomFiltering(string category, DateTime dateFrom, DateTime dateTo, int prizeFrom, int prizeTo, int userId);
-        CustomFilterValidation ValidateCustomFilter(DateTime dateFrom, DateTime dateTo, int prizeFrom, int prizeTo, int userId);
+        List<Product> CustomFiltering(string category, DateTime dateFrom, DateTime dateTo, int priceFrom, int priceTo, int userId);
+        CustomFilterValidation ValidateCustomFilter(DateTime dateFrom, DateTime dateTo, int priceFrom, int priceTo, int userId);
         List<Product> FilterByTime(string time, int value, string category, int userId);
+        void UpdateNote(Product product);
     }
 }

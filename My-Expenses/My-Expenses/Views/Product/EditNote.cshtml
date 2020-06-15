@@ -1,0 +1,18 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model My_Expenses.ViewModels.ProductModels.EditNoteModel
+@{
+    ViewData["Title"] = "EditNote";
+    Layout = "_Layout";
+}
+@section Styles{
+    <link rel="stylesheet" href="~/css/DefaultForm/form.css" />
+}
+<div class="formContainer">
+    <form asp-action="EditNote">
+        <input type="hidden" />
+        <textarea class="form-control" asp-for="@Model.Note" required></textarea>
+        <input type="submit" value="Save" class="btn btn-dark form-control" />
+        <div asp-validation-summary="All"></div>
+    </form>
+</div>
+

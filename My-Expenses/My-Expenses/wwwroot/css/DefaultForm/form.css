@@ -2,7 +2,7 @@
     width: 30%;
     margin: auto;
 }
-.formContainer input, select{
+.formContainer input, select, textarea{
     margin-top: 15px;
 }
 .formHeader {

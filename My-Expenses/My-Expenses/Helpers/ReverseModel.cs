@@ -34,7 +34,16 @@ namespace My_Expenses.Helpers
             {
                 Name = model.Name,
                 Prize = model.Prize,
-                Category = model.Category
+                Category = model.Category,
+                Note = model.Note
+            };
+        }
+        public static Product ToProduct(EditNoteModel model)
+        {
+            return new Product
+            {
+                Id = model.Id,
+                Note = model.Note
             };
         }
     }

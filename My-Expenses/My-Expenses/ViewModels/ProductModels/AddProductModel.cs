@@ -10,5 +10,6 @@ namespace My_Expenses.ViewModels.ProductModels
         public int Prize { get; set; }
         [Required]
         public string Category { get; set; }
+        public string Note { get; set; }
     }
 }

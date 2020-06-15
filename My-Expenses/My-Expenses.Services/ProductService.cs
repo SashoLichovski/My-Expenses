@@ -43,12 +43,13 @@ namespace My_Expenses.Services
                 Prize = product.Prize,
                 Category = product.Category,
                 DateAdded = DateTime.Now,
-                UserId = userId
+                UserId = userId,
+                Note = product.Note
             };
             productRepository.AddProduct(newProduct);
         }
 
-        public List<Product> CustomFiltering(string category, DateTime dateFrom, DateTime dateTo, int prizeFrom, int prizeTo, int userId)
+        public List<Product> CustomFiltering(string category, DateTime dateFrom, DateTime dateTo, int priceFrom, int priceTo, int userId)
         {
             var filteredByCategory = new List<Product>();
             var allProducts = productRepository.GetAllByUserId(userId);
@@ -56,7 +57,7 @@ namespace My_Expenses.Services
             {
                 filteredByCategory = allProducts
                     .Where(x => x.DateAdded >= dateFrom && x.DateAdded <= dateTo &&
-                        x.Prize >= prizeFrom && x.Prize <= prizeTo)
+                        x.Prize >= priceFrom && x.Prize <= priceTo)
                     .OrderByDescending(x => x.DateAdded)
                     .ToList();
             }
@@ -65,20 +66,20 @@ namespace My_Expenses.Services
                 filteredByCategory = allProducts
                     .Where(x => x.Category == category &&
                         x.DateAdded >= dateFrom && x.DateAdded <= dateTo &&
-                        x.Prize >= prizeFrom && x.Prize <= prizeTo)
+                        x.Prize >= priceFrom && x.Prize <= priceTo)
                     .OrderByDescending(x => x.DateAdded)
                     .ToList();
             }
 
             return filteredByCategory;
         }
-        public CustomFilterValidation ValidateCustomFilter(DateTime dateFrom, DateTime dateTo, int prizeFrom, int prizeTo, int userId)
+        public CustomFilterValidation ValidateCustomFilter(DateTime dateFrom, DateTime dateTo, int priceFrom, int priceTo, int userId)
         {
             var validation = new CustomFilterValidation();
             var allProducts = productRepository.GetAllByUserId(userId);
-            var prizeRange = allProducts.Where(x => x.Prize >= prizeFrom && x.Prize <= prizeTo).ToList();
+            var priceRange = allProducts.Where(x => x.Prize >= priceFrom && x.Prize <= priceTo).ToList();
             var dateRange = allProducts.Where(x => x.DateAdded >= dateFrom && x.DateAdded <= dateTo).ToList();
-            if (prizeRange.Count == 0)
+            if (priceRange.Count == 0)
             {
                 validation.IsValid = false;
                 validation.NotValidMessage = "No products found in the prize range you entered";
@@ -88,12 +89,12 @@ namespace My_Expenses.Services
                 validation.IsValid = false;
                 validation.NotValidMessage = "No products found in the date range you entered";
             }
-            if (prizeRange.Count == 0 && dateRange.Count == 0)
+            if (priceRange.Count == 0 && dateRange.Count == 0)
             {
                 validation.IsValid = false;
                 validation.NotValidMessage = "No products found in both prize and date range";
             }
-            if(prizeRange.Count > 0 && dateRange.Count > 0)
+            if(priceRange.Count > 0 && dateRange.Count > 0)
             {
                 validation.IsValid = true;
             }
@@ -166,6 +167,13 @@ namespace My_Expenses.Services
                 }
                 return filteredList;
             }
+        }
+
+        public void UpdateNote(Product product)
+        {
+            var dbProduct = productRepository.GetById(product.Id);
+            dbProduct.Note = product.Note;
+            productRepository.Update(dbProduct);
         }
     }
 }

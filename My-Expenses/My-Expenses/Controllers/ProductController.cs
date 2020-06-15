@@ -31,16 +31,16 @@ namespace My_Expenses.Controllers
             };
             return View(dataModel);
         }
-        public IActionResult CustomFilter(string category, DateTime dateFrom, DateTime dateTo, int prizeFrom, int prizeTo)
+        public IActionResult CustomFilter(string category, DateTime dateFrom, DateTime dateTo, int priceFrom, int priceTo)
         {
             var userId = int.Parse(User.FindFirst("Id").Value);
 
-            var isValid = productService.ValidateCustomFilter(dateFrom, dateTo, prizeFrom, prizeTo, userId);
+            var isValid = productService.ValidateCustomFilter(dateFrom, dateTo, priceFrom, priceTo, userId);
             var dataModel = new HomePageCalculatedDataModel();
             if (isValid.IsValid)
             {
                 ViewBag.header = "Custom filter";
-                var products = productService.CustomFiltering(category, dateFrom, dateTo, prizeFrom, prizeTo, userId);
+                var products = productService.CustomFiltering(category, dateFrom, dateTo, priceFrom, priceTo, userId);
                 var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
                 var calculationData = productService.CalculateData(products);
                 dataModel.Products = convertedList;
@@ -52,8 +52,9 @@ namespace My_Expenses.Controllers
         }
         public IActionResult ByMonth(string time ,int noOfMonths, string category)
         {
-            var userId = int.Parse(User.FindFirst("Id").Value);
+            _ = noOfMonths == 1 ? ViewBag.header = "Last month" : ViewBag.header = $"Last {noOfMonths} months";
 
+            var userId = int.Parse(User.FindFirst("Id").Value);
             var products = productService.FilterByTime(time, noOfMonths, category, userId);
 
             var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
@@ -68,6 +69,8 @@ namespace My_Expenses.Controllers
         }
         public IActionResult ByWeek(string time, int noOfWeeks, string category)
         {
+            _ = noOfWeeks == 1 ? ViewBag.header = "Last week" : ViewBag.header = $"Last {noOfWeeks} weeks";
+
             var userId = int.Parse(User.FindFirst("Id").Value);
             var products = productService.FilterByTime(time, noOfWeeks, category, userId);
 
@@ -83,8 +86,9 @@ namespace My_Expenses.Controllers
         }
         public IActionResult ByDay(string time, int noOfDays, string category)
         {
-            var userId = int.Parse(User.FindFirst("Id").Value);
+            _ = noOfDays == 1 ? ViewBag.header = "Last day" : ViewBag.header = $"Last {noOfDays} days";
 
+            var userId = int.Parse(User.FindFirst("Id").Value);
             var products = productService.FilterByTime(time, noOfDays, category, userId);
 
             var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
@@ -135,6 +139,19 @@ namespace My_Expenses.Controllers
         {
             var product = productService.GetById(id);
             productService.DeleteProduct(product);
+            return RedirectToAction("HomePage");
+        }
+        public IActionResult EditNote(int id)
+        {
+            var product = productService.GetById(id);
+            var model = ConvertTo.EditNoteModel(product);
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult EditNote(EditNoteModel model)
+        {
+            var product = ReverseModel.ToProduct(model);
+            productService.UpdateNote(product);
             return RedirectToAction("HomePage");
         }
     }

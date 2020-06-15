@@ -47,5 +47,6 @@ namespace My_Expenses.Repositories
             context.Products.Update(product);
             context.SaveChanges();
         }
+
     }
 }

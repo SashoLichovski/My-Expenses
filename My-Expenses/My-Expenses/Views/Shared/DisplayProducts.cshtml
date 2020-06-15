@@ -6,26 +6,45 @@
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Prize</th>
+                <th>Price</th>
                 <th>Date added</th>
                 <th>Category</th>
+                <th>Notes</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var product in @Model.Products)
             {
-                <tr>
+                <tr onclick="ToggleNote(event)">
                     <td>@product.Name</td>
                     <td>@product.Prize den.</td>
                     <td>@product.DateCreated</td>
                     <td>@product.Category</td>
+                    @if (!string.IsNullOrEmpty(product.Note))
+                    {
+                        <td class="checkedIcon"><i class="fas fa-check"></i></td>
+                    }
+                    else
+                    {
+                        <td><i class="fas fa-times"></i></td>
+                    }
                     <td>
                         <a asp-action="EditProduct" asp-route-id="@product.Id">Edit</a> |
                         <a asp-action="RemoveProduct" asp-route-id="@product.Id" onclick="return confirm(`Confirm delete action`)">Delete</a>
                     </td>
                 </tr>
+                if (!string.IsNullOrEmpty(product.Note))
+                {
+                    <tr class="productNote">
+                        <td colspan="5">@product.Note</td>
+                        <td>
+                            <a asp-action="EditNote" asp-route-id="@product.Id">Edit note</a>
+                        </td>
+                    </tr>
+                }
             }
+            
         </tbody>
     </table>
 </div>

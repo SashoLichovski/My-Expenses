@@ -12,7 +12,7 @@ namespace My_Expenses.Helpers
     {
         internal static HomePageModel HomePageModel(Product product)
         {
-            return new HomePageModel
+            var newModel = new HomePageModel
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -20,6 +20,11 @@ namespace My_Expenses.Helpers
                 DateCreated = product.DateAdded.ToString("dddd, MMMM dd, yyyy"),
                 Category = product.Category,
             };
+            if (!string.IsNullOrEmpty(product.Note))
+            {
+                newModel.Note = product.Note;
+            }
+            return newModel;
         }
         internal static EditProductModel EditProductModel(Product product)
         {
@@ -38,6 +43,14 @@ namespace My_Expenses.Helpers
                 TotalAmount = model.TotalAmount,
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
+            };
+        }
+
+        internal static EditNoteModel EditNoteModel(Product product)
+        {
+            return new EditNoteModel
+            {
+                Note = product.Note
             };
         }
     }

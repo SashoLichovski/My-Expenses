@@ -13,14 +13,20 @@
 
 <div class="formContainer">
     <form asp-action="AddProduct">
+
         <input class="form-control" placeholder="Product name" asp-for="@Model.Name" />
+
         <input class="form-control" type="number" placeholder="Prize" asp-for="@Model.Prize" />
+
         <select id="category" name="Category" class="form-control" asp-for="@Model.Category" >
             <option value="Food and Drinks">Food and drinks</option>
             <option value="Bills">Bills</option>
             <option value="Clothing">Clothing</option>
             <option value="Other">Other</option>
         </select>
+
+        <textarea class="form-control" placeholder="Add notes ( not required )" asp-for="@Model.Note"></textarea>
+
         <input type="submit" value="Add product" class="btn btn-dark form-control" />
         <div asp-validation-summary="All"></div>
     </form>
