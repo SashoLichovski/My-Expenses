@@ -1,0 +1,23 @@
+﻿.overviewContainer{
+    padding: 10px 50px;
+}
+.AccContainer table{
+    width: 40%;
+    margin-top: 20px;
+}
+.AccContainer th, td{
+    padding: 15px;
+}
+.AccContainer tr{
+    border-bottom: 1px solid rgba(0,0,0,0.5);
+}
+
+#transferForm {
+    width: 20%;
+    padding: 10px;
+    display: flex;
+    transition: all 1s;
+}
+#transferForm input {
+    margin-right: 5px;
+}

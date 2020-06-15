@@ -16,5 +16,6 @@ namespace My_Expenses.Data
         [Required]
         public string EmailAdress { get; set; }
         public List<Product> Products { get; set; }
+        public Account Account { get; set; }
     }
 }

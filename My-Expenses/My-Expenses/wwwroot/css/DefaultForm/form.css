@@ -2,8 +2,13 @@
     width: 30%;
     margin: auto;
 }
-.formContainer input, select, textarea{
+.formContainer p{
     margin-top: 15px;
+    margin-bottom: -1px;
+    padding: 10px;
+}
+.formContainer .btn-dark{
+    margin-top: 20px !important;
 }
 .formHeader {
     width: 90%;

@@ -54,8 +54,11 @@ namespace My_Expenses
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IAccountService, AccountService>();
+
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -76,8 +79,8 @@ namespace My_Expenses
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

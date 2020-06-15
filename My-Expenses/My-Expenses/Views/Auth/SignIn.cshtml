@@ -14,8 +14,13 @@
 
 <div class="formContainer">
     <form asp-action="SignIn" asp-route-returnUrl="@Context.Request.Query["returnUrl"]">
+
+        <p>Username</p>
         <input placeholder="Username" class="form-control" asp-for="@Model.Username" />
+
+        <p>Password</p>
         <input placeholder="Password" type="password" class="form-control" asp-for="@Model.Password" />
+
         <input type="submit" value="Sign in" class="btn btn-dark form-control" />
     </form>
     <div class="registerLinkContainer">

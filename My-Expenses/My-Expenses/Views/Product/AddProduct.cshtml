@@ -7,17 +7,19 @@
     <link rel="stylesheet" href="~/css/DefaultForm/form.css" />
 }
 <header class="formHeader">
-    <h3>Define you product</h3>
-    <h5>All inputs are required</h5>
+    <h3>Create product</h3>
 </header>
 
 <div class="formContainer">
     <form asp-action="AddProduct">
 
-        <input class="form-control" placeholder="Product name" asp-for="@Model.Name" />
+        <p>Product name</p>
+        <input class="form-control" placeholder="..." asp-for="@Model.Name" />
 
-        <input class="form-control" type="number" placeholder="Prize" asp-for="@Model.Prize" />
+        <p>Price</p>
+        <input class="form-control" type="number" asp-for="@Model.Prize" />
 
+        <p>Caategory</p>
         <select id="category" name="Category" class="form-control" asp-for="@Model.Category" >
             <option value="Food and Drinks">Food and drinks</option>
             <option value="Bills">Bills</option>
@@ -25,7 +27,8 @@
             <option value="Other">Other</option>
         </select>
 
-        <textarea class="form-control" placeholder="Add notes ( not required )" asp-for="@Model.Note"></textarea>
+        <p>Note</p>
+        <textarea class="form-control" placeholder="Not required" asp-for="@Model.Note"></textarea>
 
         <input type="submit" value="Add product" class="btn btn-dark form-control" />
         <div asp-validation-summary="All"></div>

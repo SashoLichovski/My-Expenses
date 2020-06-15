@@ -19,6 +19,30 @@ namespace My_Expenses.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("My_Expenses.Data.Account", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MainAccount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SavingsAccount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Accounts");
+                });
+
             modelBuilder.Entity("My_Expenses.Data.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -75,6 +99,15 @@ namespace My_Expenses.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("My_Expenses.Data.Account", b =>
+                {
+                    b.HasOne("My_Expenses.Data.User", "User")
+                        .WithOne("Account")
+                        .HasForeignKey("My_Expenses.Data.Account", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("My_Expenses.Data.Product", b =>

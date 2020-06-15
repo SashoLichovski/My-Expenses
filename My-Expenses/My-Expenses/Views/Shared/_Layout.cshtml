@@ -19,33 +19,32 @@
         {
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Hi @User.Identity.Name !
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <a asp-controller="Product" asp-action="AddProduct" class="nav-link text-light">Add product</a>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="AccountOverview">My account</a>
                             <a class="dropdown-item" asp-controller="Auth" asp-action="SignOut">Sign out</a>
                         </div>
                     </li>
+
                     <li class="nav-item">
                         <a asp-controller="Product" asp-action="HomePage" class="nav-link text-light">All products</a>
                     </li>
-                    <li class="nav-item">
-                        <a asp-controller="Product" asp-action="AddProduct" class="nav-link text-light">Add product</a>
-                    </li>
                 </ul>
+
                 <div class="text-light" id="sidebarToggler" onclick="ToggleSidebar()">
                     <div></div>
                     <div></div>
                     <div></div>
                 </div>
+
             </div>
         }
     </nav>
-
-    <h4 id="viewbagHeader">@ViewBag.header</h4>
 
     <main>
         @RenderBody()

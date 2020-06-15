@@ -185,3 +185,5 @@ C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcore
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\My-Expenses.dll
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\My-Expenses.pdb
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\EditNote.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Account\AccountOverview.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Account\TransferResult.cshtml.g.cs

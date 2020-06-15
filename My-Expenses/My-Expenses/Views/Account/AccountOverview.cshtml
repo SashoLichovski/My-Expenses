@@ -1,0 +1,58 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model My_Expenses.ViewModels.AccountModels.AccountOverviewModel
+@{
+    Layout = "_Layout";
+}
+@section Styles{ 
+    <link rel="stylesheet" href="~/css/Account/Overview.css" />
+}
+<div class="overviewContainer">
+
+    <div class="AccContainer">
+        <table>
+            <tr>
+                <th>Account name</th>
+                <th>Total amount</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td>Main account</td>
+                <td>@Model.MainAccount</td>
+                <td>
+                    <a class="btn btn-outline-success btn-sm" >Add</a> |
+                    <a class="btn btn-outline-success btn-sm" onclick="ToggleForm()">Transfer to savings</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <form asp-action="TransferToSavings" id="transferForm" >
+        <input type="number" id="amount" name="amount" class="form-control" placeholder="Enter amount" />
+        <input type="submit" class="btn btn-success form-control" value="Transfer" onclick="return confirm(`Confirm transfer`)"/>
+    </form>
+
+    <div class="AccContainer">
+        <table>
+            <tr>
+                <th>Account name</th>
+                <th>Total amount</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td>Main account</td>
+                <td>@Model.SavingsAccount</td>
+                <td>
+                    <a>action</a> |
+                    <a>action</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+@section Scripts{ 
+    <script src="~/js/Account.js"></script>
+}
+
+
+

@@ -1,0 +1,21 @@
+﻿@model My_Expenses.ViewModels.AccountModels.TransferResultModel
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "_Layout";
+}
+<style>
+    .resultContainer{
+        padding: 50px;
+    }
+</style>
+
+<div class="resultContainer">
+    <h4>Transfer result:</h4>
+    <p>@Model.ResultMessage</p>
+    @if (Model.IsValid)
+    {
+        <p>You transfered @Model.AmountTransfered and still have @Model.AmountLeft</p>
+    }
+    <p>Back to <a asp>my account</a></p>
+</div>

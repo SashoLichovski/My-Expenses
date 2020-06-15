@@ -8,7 +8,7 @@ using My_Expenses.ViewModels.ProductModels;
 
 namespace My_Expenses.Controllers
 {
-    //[Authorize(Policy = "IsLoggedIn")]
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductService productService;

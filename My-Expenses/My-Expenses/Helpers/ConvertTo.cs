@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using My_Expenses.Data;
 using My_Expenses.Services.Dto;
+using My_Expenses.ViewModels.AccountModels;
 using My_Expenses.ViewModels.ProductModels;
 
 namespace My_Expenses.Helpers
@@ -26,6 +27,28 @@ namespace My_Expenses.Helpers
             }
             return newModel;
         }
+
+        internal static AccountOverviewModel AccountOverviewModel(Account account)
+        {
+            return new AccountOverviewModel
+            {
+                Id = account.Id,
+                MainAccount = account.MainAccount,
+                SavingsAccount = account.SavingsAccount
+            };
+        }
+
+        internal static TransferResultModel TransferResultModel(TransactionStatus status, int amount, int leftOnAcc)
+        {
+            return new TransferResultModel
+            {
+                IsValid = status.IsValid,
+                ResultMessage = status.ResultMessage,
+                AmountTransfered = amount,
+                AmountLeft = leftOnAcc
+            };
+        }
+
         internal static EditProductModel EditProductModel(Product product)
         {
             return new EditProductModel
