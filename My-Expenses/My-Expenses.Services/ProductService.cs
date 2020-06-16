@@ -127,7 +127,7 @@ namespace My_Expenses.Services
             if (time == "month")
             {
                 var allProducts = productRepository.GetAllByUserId(userId)
-                .Where(x => x.DateAdded > DateTime.Now.AddMonths(-value))
+                .Where(x => x.DateAdded > DateTime.Now.AddMonths(-dateRange))
                 .ToList();
                 var filteredList = allProducts;
                 if (category != "all")
@@ -140,9 +140,9 @@ namespace My_Expenses.Services
             }
             else if (time == "week")
             {
-                value *= 7;
+                dateRange *= 7;
                 var allProducts = productRepository.GetAllByUserId(userId)
-                    .Where(x => x.DateAdded > DateTime.Now.AddDays(-value))
+                    .Where(x => x.DateAdded > DateTime.Now.AddDays(-dateRange))
                     .ToList();
                 var filteredList = allProducts;
                 if (category != "all")
@@ -156,7 +156,7 @@ namespace My_Expenses.Services
             else 
             {
                 var allProducts = productRepository.GetAllByUserId(userId)
-                .Where(x => x.DateAdded > DateTime.Now.AddDays(-value))
+                .Where(x => x.DateAdded > DateTime.Now.AddDays(-dateRange))
                 .ToList();
                 var filteredList = allProducts;
                 if (category != "all")
