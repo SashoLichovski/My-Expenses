@@ -1,0 +1,23 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model My_Expenses.ViewModels.ProductModels.AddProductResultModel
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    .resultContainer {
+        padding: 50px;
+    }
+</style>
+
+<div class="resultContainer">
+    <h4>Add product result:</h4>
+    <p>@Model.ResultMessage</p>
+    @if (Model.IsValid)
+    {
+        <p>Product name: @Model.ProductName</p>
+        <p>Cost: @Model.ProductPrice</p>
+        <p>Left on spending account: @Model.AmountLeft</p>
+    }
+    <p>Back to <a asp-action="HomePage">Home page</a></p>
+</div>

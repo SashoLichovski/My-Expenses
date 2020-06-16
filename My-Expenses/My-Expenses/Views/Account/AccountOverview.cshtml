@@ -8,51 +8,11 @@
 }
 <div class="overviewContainer">
 
-    <div class="AccContainer">
-        <table>
-            <tr>
-                <th>Account name</th>
-                <th>Total amount</th>
-                <th>Actions</th>
-            </tr>
-            <tr>
-                <td>Main account</td>
-                <td>@Model.MainAccount</td>
-                <td>
-                    <a class="btn btn-success btn-sm" onclick="ToggleForm(`addForm`)">Add</a> |
-                    <a class="btn btn-success btn-sm" onclick="ToggleForm(`transferForm`)">Transfer to savings</a>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <partial name="/Views/Account/PartialViews/_MainAccount.cshtml" for="MainAccount"/>
 
-    <form asp-action="TransferToSavings" id="transferForm" class="forms">
-        <input type="number" id="amount" name="amount" class="form-control" placeholder="Enter amount" />
-        <input type="submit" class="btn btn-success form-control" value="Transfer" onclick="return confirm(`Confirm transfer`)" />
-    </form>
+    <partial name="/Views/Account/PartialViews/_SpendingAccount.cshtml" for="SpendingAccount"/>
 
-    <form asp-action="AddToMain" id="addForm" class="forms">
-        <input type="number" id="amount" name="amount" class="form-control" placeholder="Enter amount" />
-        <input type="submit" class="btn btn-success form-control" value="Add" onclick="return confirm(`Confirm adding`)" />
-    </form>
-
-    <div class="AccContainer">
-        <table>
-            <tr>
-                <th>Account name</th>
-                <th>Total amount</th>
-                <th>Actions</th>
-            </tr>
-            <tr>
-                <td>Main account</td>
-                <td>@Model.SavingsAccount</td>
-                <td>
-                    <a>action</a> |
-                    <a>action</a>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <partial name="/Views/Account/PartialViews/_SavingsAccount.cshtml" for="SpendingAccount"/>
 
 </div>
 @section Scripts{ 

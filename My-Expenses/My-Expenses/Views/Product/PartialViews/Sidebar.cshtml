@@ -43,8 +43,8 @@
                     <h5>By months <i class='fas fa-caret-down' style='font-size:24px'></i></h5>
                 </div>
 
-                <form class="filterForm" id="formByMonth" asp-controller="Product" asp-action="ByMonth">
-                    <select id="noOfMonths" name="noOfMonths" class="form-control">
+                <form class="filterForm" id="formByMonth" asp-controller="Product" asp-action="FilterByTimeAndCategory">
+                    <select id="dateRange" name="dateRange" class="form-control">
                         <option value="4">Last 4 months</option>
                         <option value="3">Last 3 months</option>
                         <option value="2">Last 2 months</option>
@@ -71,8 +71,8 @@
                     <h5>By weeks <i class='fas fa-caret-down' style='font-size:24px'></i></h5>
                 </div>
 
-                <form class="filterForm" id="formByWeek" asp-controller="Product" asp-action="ByWeek">
-                    <select id="noOfWeeks" name="noOfWeeks" class="form-control">
+                <form class="filterForm" id="formByWeek" asp-controller="Product" asp-action="FilterByTimeAndCategory">
+                    <select id="dateRange" name="dateRange" class="form-control">
                         <option value="4">Last 4 weeks</option>
                         <option value="3">Last 3 weeks</option>
                         <option value="2">Last 2 weeks</option>
@@ -99,8 +99,8 @@
                     <h5>By days <i class='fas fa-caret-down' style='font-size:24px'></i></h5>
                 </div>
 
-                <form class="filterForm" id="formByDay" asp-controller="Product" asp-action="ByDay">
-                    <select id="noOfDays" name="noOfDays" class="form-control">
+                <form class="filterForm" id="formByDay" asp-controller="Product" asp-action="FilterByTimeAndCategory">
+                    <select id="dateRange" name="dateRange" class="form-control">
                         <option value="4">Last 4 days</option>
                         <option value="3">Last 3 days</option>
                         <option value="2">Last 2 days</option>

@@ -33,7 +33,7 @@ namespace My_Expenses.Helpers
             return new Product
             {
                 Name = model.Name,
-                Prize = model.Prize,
+                Price = model.Price,
                 Category = model.Category,
                 Note = model.Note
             };

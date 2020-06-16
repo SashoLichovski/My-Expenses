@@ -28,14 +28,14 @@ namespace My_Expenses.Controllers
         }
 
         [HttpPost]
-        public IActionResult TransferToSavings(int amount)
+        public IActionResult TransferToAccount(int amount, string toAccount)
         {
             var userId = int.Parse(User.FindFirst("Id").Value);
             var account = accountService.GetAccByUserId(userId);
             var status = accountService.ValidateTransfer(amount, account);
             if (status.IsValid)
             {
-                accountService.TransferToSavings(amount, account);
+                accountService.TransferToAccount(amount, account, toAccount);
                 var statusModel = ConvertTo.TransferResultModel(status,amount,account.MainAccount);
                 return RedirectToAction("TransferResult", statusModel);
             }
@@ -49,6 +49,16 @@ namespace My_Expenses.Controllers
         public IActionResult TransferResult(TransferResultModel result)
         {
             return View(result);
+        }
+
+        public IActionResult AddToMain(int amount)
+        {
+            var userId = int.Parse(User.FindFirst("Id").Value);
+            var account = accountService.GetAccByUserId(userId);
+
+            accountService.AddToMainAcc(amount, account);
+
+            return RedirectToAction("AccountOverview");
         }
     }
 }

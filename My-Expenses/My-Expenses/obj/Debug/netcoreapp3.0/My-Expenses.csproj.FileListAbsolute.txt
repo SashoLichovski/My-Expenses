@@ -174,9 +174,6 @@ C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcore
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\CustomFilter.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\EditProduct.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\HomePage.cshtml.g.cs
-C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Shared\CalculatedInfoTable.cshtml.g.cs
-C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Shared\DisplayProducts.cshtml.g.cs
-C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Shared\Sidebar.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\My-Expenses.RazorTargetAssemblyInfo.cache
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\My-Expenses.RazorTargetAssemblyInfo.cs
@@ -187,3 +184,11 @@ C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcore
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\EditNote.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Account\AccountOverview.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Account\TransferResult.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Account\PartialViews\_MainAccount.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\PartialViews\CalculatedInfoTable.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\PartialViews\DisplayProducts.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\PartialViews\Sidebar.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Account\PartialViews\_SpendingAccount.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Account\PartialViews\_SavingsAccount.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\AddProductResult.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\FilterByTimeAndCategory.cshtml.g.cs

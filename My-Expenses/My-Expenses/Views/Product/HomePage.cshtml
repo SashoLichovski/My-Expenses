@@ -8,18 +8,17 @@
     <link rel="stylesheet" href="~/css/Home/Sidebar.css" />
 }
 
-<partial name="Sidebar" />
+<partial name="/Views/Product/PartialViews/Sidebar.cshtml" />
 
 <div class="contentContainer">
 
-    <partial name="CalculatedInfoTable" />
+    <partial name="/Views/Product/PartialViews/CalculatedInfoTable.cshtml" for="Data" />
 
-    <partial name="DisplayProducts" />
+    <partial name="/Views/Product/PartialViews/DisplayProducts.cshtml" for="Products" />
 
 </div>
 
 @section Scripts{
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <script src="~/js/Sidebar.js"></script>
     <script src="~/js/Table.js"></script>
     <script src="https://kit.fontawesome.com/15dcd5d68f.js" crossorigin="anonymous"></script>

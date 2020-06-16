@@ -17,25 +17,67 @@ namespace My_Expenses.Services
             this.accountRepository = accountRepository;
         }
 
+        public void AddToMainAcc(int amount, Account account)
+        {
+            account.MainAccount += amount;
+            accountRepository.Update(account);
+        }
+
         public Account GetAccByUserId(int userId)
         {
             return accountRepository.GetAccByUserId(userId);
         }
 
-        public void TransferToSavings(int amount, Account account)
+        public void SubtractSpendingAccount(int price, int userId)
         {
-            account.MainAccount -= amount;
-            account.SavingsAccount += amount;
+            var account = accountRepository.GetAccByUserId(userId);
+            account.SpendingAccount -= price;
             accountRepository.Update(account);
         }
 
-        public TransactionStatus ValidateTransfer(int amount, Account account)
+        public void TransferToAccount(int amount, Account account, string toAccount)
         {
-            var model = new TransactionStatus();
+            account.MainAccount -= amount;
+            if (toAccount == "savings")
+            {
+                account.SavingsAccount += amount;
+                accountRepository.Update(account);
+            }
+            else if (toAccount == "spending")
+            {
+                account.SpendingAccount += amount;
+                accountRepository.Update(account);
+            }
+        }
+
+        public AddProductStatus ValidateSpendingAccount(int price, int userId)
+        {
+            var status = new AddProductStatus();
+            var account = accountRepository.GetAccByUserId(userId);
+            if (account.SpendingAccount >= price)
+            {
+                account.SpendingAccount -= price;
+                accountRepository.Update(account);
+                status.AccountRemainingBalance = account.SpendingAccount;
+                status.IsValid = true;
+                status.ResultMessage = $"Product successfully added.";
+            }
+            else
+            {
+                status.AccountRemainingBalance = account.SpendingAccount;
+                status.IsValid = false;
+                status.ResultMessage = $"Adding product failed - Insufficient funds. Spending account balance: {account.SpendingAccount} | Product price: {price}";
+            }
+            return status;
+        }
+
+        public TransferStatus ValidateTransfer(int amount, Account account)
+        {
+            var model = new TransferStatus();
             if (account.MainAccount >= amount)
             {
                 model.IsValid = true;
-                model.ResultMessage = "Amount was successfully transfered to savings account";
+                model.ResultMessage = "Amount was successfully transfered";
             }
             else
             {

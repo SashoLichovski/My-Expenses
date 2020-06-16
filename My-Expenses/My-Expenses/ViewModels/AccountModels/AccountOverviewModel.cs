@@ -10,5 +10,6 @@ namespace My_Expenses.ViewModels.AccountModels
         public int Id { get; set; }
         public int MainAccount { get; set; }
         public int SavingsAccount { get; set; }
+        public int SpendingAccount { get; set; }
     }
 }

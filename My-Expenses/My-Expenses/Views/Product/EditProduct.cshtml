@@ -15,7 +15,7 @@
     <form asp-action="EditProduct">
         <input type="hidden" asp-for="@Model.Id" />
         <input class="form-control" placeholder="Product name" asp-for="@Model.Name" />
-        <input class="form-control" type="number" placeholder="Prize" asp-for="@Model.Prize" />
+        <input class="form-control" type="number" placeholder="Prize" asp-for="@Model.Price" />
         <select id="category" name="Category" class="form-control" asp-for="@Model.Category">
             <option value="Food and Drinks">Food and drinks</option>
             <option value="Bills">Bills</option>

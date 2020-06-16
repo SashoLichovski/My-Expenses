@@ -13,11 +13,11 @@
 }
 
 .forms {
-    width: 20%;
+    width: 50%;
     padding: 10px;
     display: flex;
     transition: all 1s;
 }
-.forms input {
+.forms input, select {
     margin-right: 5px;
 }

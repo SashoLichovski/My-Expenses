@@ -20,7 +20,7 @@ namespace My_Expenses.Services
         public CalculatedData CalculateData(List<Product> products)
         {
             var totalAmount = 0;
-            products.ForEach(x => totalAmount += x.Prize);
+            products.ForEach(x => totalAmount += x.Price);
             if (products.Count > 0)
             {
                 DateTime startingDate = products.Min(x => x.DateAdded);
@@ -40,7 +40,7 @@ namespace My_Expenses.Services
             var newProduct = new Product()
             {
                 Name = product.Name,
-                Prize = product.Prize,
+                Price = product.Price,
                 Category = product.Category,
                 DateAdded = DateTime.Now,
                 UserId = userId,
@@ -57,7 +57,7 @@ namespace My_Expenses.Services
             {
                 filteredByCategory = allProducts
                     .Where(x => x.DateAdded >= dateFrom && x.DateAdded <= dateTo &&
-                        x.Prize >= priceFrom && x.Prize <= priceTo)
+                        x.Price >= priceFrom && x.Price <= priceTo)
                     .OrderByDescending(x => x.DateAdded)
                     .ToList();
             }
@@ -66,7 +66,7 @@ namespace My_Expenses.Services
                 filteredByCategory = allProducts
                     .Where(x => x.Category == category &&
                         x.DateAdded >= dateFrom && x.DateAdded <= dateTo &&
-                        x.Prize >= priceFrom && x.Prize <= priceTo)
+                        x.Price >= priceFrom && x.Price <= priceTo)
                     .OrderByDescending(x => x.DateAdded)
                     .ToList();
             }
@@ -77,12 +77,12 @@ namespace My_Expenses.Services
         {
             var validation = new CustomFilterValidation();
             var allProducts = productRepository.GetAllByUserId(userId);
-            var priceRange = allProducts.Where(x => x.Prize >= priceFrom && x.Prize <= priceTo).ToList();
+            var priceRange = allProducts.Where(x => x.Price >= priceFrom && x.Price <= priceTo).ToList();
             var dateRange = allProducts.Where(x => x.DateAdded >= dateFrom && x.DateAdded <= dateTo).ToList();
             if (priceRange.Count == 0)
             {
                 validation.IsValid = false;
-                validation.NotValidMessage = "No products found in the prize range you entered";
+                validation.NotValidMessage = "No products found in the price range you entered";
             }
             if (dateRange.Count == 0)
             {
@@ -92,7 +92,7 @@ namespace My_Expenses.Services
             if (priceRange.Count == 0 && dateRange.Count == 0)
             {
                 validation.IsValid = false;
-                validation.NotValidMessage = "No products found in both prize and date range";
+                validation.NotValidMessage = "No products found in both price and date range";
             }
             if(priceRange.Count > 0 && dateRange.Count > 0)
             {
@@ -115,14 +115,14 @@ namespace My_Expenses.Services
             return productRepository.GetById(id);
         }
 
-        public void UpdateProduct(Product product, string newName, string newCategory, int newPrize)
+        public void UpdateProduct(Product product, string newName, string newCategory, int newPrice)
         {
             product.Name = newName;
             product.Category = newCategory;
-            product.Prize = newPrize;
+            product.Price = newPrice;
             productRepository.Update(product);
         }
-        public List<Product> FilterByTime(string time, int value, string category, int userId)
+        public List<Product> FilterByTime(string time, int dateRange, string category, int userId)
         {
             if (time == "month")
             {

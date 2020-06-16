@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/css/Home/HomePage.css" />
     <link rel="stylesheet" href="~/css/Home/Sidebar.css" />
 }
-<partial name="Sidebar" />
+<partial name="/Views/Product/PartialViews/Sidebar.cshtml" />
 
 <div class="contentContainer">
     @if (!string.IsNullOrEmpty(Model.ErrorMessage))
@@ -17,9 +17,9 @@
     }
     else
     {
-        <partial name="CalculatedInfoTable" />
+        <partial name="/Views/Product/PartialViews/CalculatedInfoTable.cshtml" for="Data"/>
 
-        <partial name="DisplayProducts" />
+        <partial name="/Views/Product/PartialViews/DisplayProducts.cshtml" for="Products"/>
     }
 </div>
 

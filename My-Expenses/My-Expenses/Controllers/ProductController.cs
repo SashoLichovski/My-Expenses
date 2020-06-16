@@ -12,10 +12,12 @@ namespace My_Expenses.Controllers
     public class ProductController : Controller
     {
         private readonly IProductService productService;
+        private readonly IAccountService accountService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IAccountService accountService)
         {
             this.productService = productService;
+            this.accountService = accountService;
         }
         public IActionResult HomePage()
         {
@@ -50,46 +52,10 @@ namespace My_Expenses.Controllers
             dataModel.ErrorMessage = isValid.NotValidMessage;
             return View(dataModel);
         }
-        public IActionResult ByMonth(string time ,int noOfMonths, string category)
+        public IActionResult FilterByTimeAndCategory(string time, int dateRange, string category)
         {
-            _ = noOfMonths == 1 ? ViewBag.header = "Last month" : ViewBag.header = $"Last {noOfMonths} months";
-
             var userId = int.Parse(User.FindFirst("Id").Value);
-            var products = productService.FilterByTime(time, noOfMonths, category, userId);
-
-            var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
-            var calculationData = productService.CalculateData(products);
-
-            var dataModel = new HomePageCalculatedDataModel()
-            {
-                Products = convertedList,
-                Data = ConvertTo.CalculatedDataModel(calculationData)
-            };
-            return View(dataModel);
-        }
-        public IActionResult ByWeek(string time, int noOfWeeks, string category)
-        {
-            _ = noOfWeeks == 1 ? ViewBag.header = "Last week" : ViewBag.header = $"Last {noOfWeeks} weeks";
-
-            var userId = int.Parse(User.FindFirst("Id").Value);
-            var products = productService.FilterByTime(time, noOfWeeks, category, userId);
-
-            var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
-            var calculationData = productService.CalculateData(products);
-
-            var dataModel = new HomePageCalculatedDataModel()
-            {
-                Products = convertedList,
-                Data = ConvertTo.CalculatedDataModel(calculationData)
-            };
-            return View(dataModel);
-        }
-        public IActionResult ByDay(string time, int noOfDays, string category)
-        {
-            _ = noOfDays == 1 ? ViewBag.header = "Last day" : ViewBag.header = $"Last {noOfDays} days";
-
-            var userId = int.Parse(User.FindFirst("Id").Value);
-            var products = productService.FilterByTime(time, noOfDays, category, userId);
+            var products = productService.FilterByTime(time, dateRange, category, userId);
 
             var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
             var calculationData = productService.CalculateData(products);
@@ -111,12 +77,27 @@ namespace My_Expenses.Controllers
         {
             if (ModelState.IsValid)
             {
-                var product = ReverseModel.ToProduct(addProductModel);
                 var userId = int.Parse(User.FindFirst("Id").Value);
-                productService.CreateProduct(product, userId);
-                return RedirectToAction("HomePage");
+                var status = accountService.ValidateSpendingAccount(addProductModel.Price, userId);
+                if (status.IsValid)
+                {
+                    accountService.SubtractSpendingAccount(addProductModel.Price, userId);
+                    var product = ReverseModel.ToProduct(addProductModel);
+                    productService.CreateProduct(product, userId);
+                    var statusModel = ConvertTo.AddProductResultModel(status, addProductModel.Price, addProductModel.Name);
+                    return RedirectToAction("AddProductResult", statusModel);
+                }
+                else
+                {
+                    var statusModel = ConvertTo.AddProductResultModel(status, addProductModel.Price, addProductModel.Name);
+                    return RedirectToAction("AddProductResult", statusModel);
+                }
             }
             return View(addProductModel);
+        }
+        public IActionResult AddProductResult(AddProductResultModel model)
+        {
+            return View(model);
         }
         public IActionResult EditProduct(int id)
         {
@@ -130,7 +111,7 @@ namespace My_Expenses.Controllers
             if (ModelState.IsValid)
             {
                 var product = productService.GetById(model.Id);
-                productService.UpdateProduct(product, model.Name, model.Category, model.Prize);
+                productService.UpdateProduct(product, model.Name, model.Category, model.Price);
                 return RedirectToAction("HomePage");
             }
             return View(model);

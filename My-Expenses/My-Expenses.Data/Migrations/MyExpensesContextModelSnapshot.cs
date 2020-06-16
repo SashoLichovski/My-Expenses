@@ -32,6 +32,9 @@ namespace My_Expenses.Data.Migrations
                     b.Property<int>("SavingsAccount")
                         .HasColumnType("int");
 
+                    b.Property<int>("SpendingAccount")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -64,7 +67,7 @@ namespace My_Expenses.Data.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Prize")
+                    b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")

@@ -34,7 +34,6 @@ namespace My_Expenses.Repositories
                 .Where(x => x.UserId == userId)
                 .OrderByDescending(x => x.DateAdded)
                 .ToList();
-
         }
 
         public Product GetById(int id)

@@ -17,7 +17,7 @@ namespace My_Expenses.Helpers
             {
                 Id = product.Id,
                 Name = product.Name,
-                Prize = product.Prize,
+                Price = product.Price,
                 DateCreated = product.DateAdded.ToString("dddd, MMMM dd, yyyy"),
                 Category = product.Category,
             };
@@ -34,11 +34,12 @@ namespace My_Expenses.Helpers
             {
                 Id = account.Id,
                 MainAccount = account.MainAccount,
-                SavingsAccount = account.SavingsAccount
+                SavingsAccount = account.SavingsAccount,
+                SpendingAccount = account.SpendingAccount
             };
         }
 
-        internal static TransferResultModel TransferResultModel(TransactionStatus status, int amount, int leftOnAcc)
+        internal static TransferResultModel TransferResultModel(TransferStatus status, int amount, int leftOnAcc)
         {
             return new TransferResultModel
             {
@@ -49,13 +50,25 @@ namespace My_Expenses.Helpers
             };
         }
 
+        internal static AddProductResultModel AddProductResultModel(AddProductStatus status, int amount, string productName)
+        {
+            return new AddProductResultModel
+            {
+                IsValid = status.IsValid,
+                ResultMessage = status.ResultMessage,
+                AmountLeft = status.AccountRemainingBalance,
+                ProductPrice = amount,
+                ProductName = productName
+            };
+        }
+
         internal static EditProductModel EditProductModel(Product product)
         {
             return new EditProductModel
             {
                 Id = product.Id,
                 Name = product.Name,
-                Prize = product.Prize,
+                Price = product.Price,
                 Category = product.Category
             };
         }
