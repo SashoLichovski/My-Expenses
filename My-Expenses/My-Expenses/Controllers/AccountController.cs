@@ -36,12 +36,12 @@ namespace My_Expenses.Controllers
             if (status.IsValid)
             {
                 accountService.TransferToSavings(amount, account);
-                var statusModel = ConvertTo.TransferResultModel(status,amount,account.SavingsAccount);
+                var statusModel = ConvertTo.TransferResultModel(status,amount,account.MainAccount);
                 return RedirectToAction("TransferResult", statusModel);
             }
             else
             {
-                var statusModel = ConvertTo.TransferResultModel(status, amount, account.SavingsAccount);
+                var statusModel = ConvertTo.TransferResultModel(status, amount, account.MainAccount);
                 return RedirectToAction("TransferResult", statusModel);
             }
         }

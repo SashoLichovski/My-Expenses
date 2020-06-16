@@ -1,7 +1,11 @@
-﻿var form = document.getElementById("transferForm");
-form.style.display = "none";
+﻿var transferForm = document.getElementById("transferForm");
+transferForm.style.display = "none";
 
-function ToggleForm() {
+var addForm = document.getElementById("addForm");
+addForm.style.display = "none";
+
+function ToggleForm(id) {
+    var form = document.getElementById(id);
     if (form.style.display == "none") {
         form.style.display = "flex";
     } else {

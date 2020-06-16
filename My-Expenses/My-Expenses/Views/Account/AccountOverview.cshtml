@@ -19,16 +19,21 @@
                 <td>Main account</td>
                 <td>@Model.MainAccount</td>
                 <td>
-                    <a class="btn btn-outline-success btn-sm" >Add</a> |
-                    <a class="btn btn-outline-success btn-sm" onclick="ToggleForm()">Transfer to savings</a>
+                    <a class="btn btn-success btn-sm" onclick="ToggleForm(`addForm`)">Add</a> |
+                    <a class="btn btn-success btn-sm" onclick="ToggleForm(`transferForm`)">Transfer to savings</a>
                 </td>
             </tr>
         </table>
     </div>
 
-    <form asp-action="TransferToSavings" id="transferForm" >
+    <form asp-action="TransferToSavings" id="transferForm" class="forms">
         <input type="number" id="amount" name="amount" class="form-control" placeholder="Enter amount" />
-        <input type="submit" class="btn btn-success form-control" value="Transfer" onclick="return confirm(`Confirm transfer`)"/>
+        <input type="submit" class="btn btn-success form-control" value="Transfer" onclick="return confirm(`Confirm transfer`)" />
+    </form>
+
+    <form asp-action="AddToMain" id="addForm" class="forms">
+        <input type="number" id="amount" name="amount" class="form-control" placeholder="Enter amount" />
+        <input type="submit" class="btn btn-success form-control" value="Add" onclick="return confirm(`Confirm adding`)" />
     </form>
 
     <div class="AccContainer">

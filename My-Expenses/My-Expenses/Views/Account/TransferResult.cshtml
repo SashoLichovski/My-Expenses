@@ -1,11 +1,11 @@
 ﻿@model My_Expenses.ViewModels.AccountModels.TransferResultModel
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "View";
     Layout = "_Layout";
 }
 <style>
-    .resultContainer{
+    .resultContainer {
         padding: 50px;
     }
 </style>
@@ -17,5 +17,5 @@
     {
         <p>You transfered @Model.AmountTransfered and still have @Model.AmountLeft</p>
     }
-    <p>Back to <a asp>my account</a></p>
+    <p>Back to <a asp-action="AccountOverview">my account</a></p>
 </div>

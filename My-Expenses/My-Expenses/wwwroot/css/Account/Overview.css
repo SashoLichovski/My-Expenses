@@ -12,12 +12,12 @@
     border-bottom: 1px solid rgba(0,0,0,0.5);
 }
 
-#transferForm {
+.forms {
     width: 20%;
     padding: 10px;
     display: flex;
     transition: all 1s;
 }
-#transferForm input {
+.forms input {
     margin-right: 5px;
 }
