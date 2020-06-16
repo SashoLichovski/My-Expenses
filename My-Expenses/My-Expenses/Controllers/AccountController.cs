@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using My_Expenses.Helpers;
 using My_Expenses.Services.Interfaces;
@@ -9,6 +10,7 @@ using My_Expenses.ViewModels.AccountModels;
 
 namespace My_Expenses.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly IAccountService accountService;
@@ -20,18 +22,19 @@ namespace My_Expenses.Controllers
 
         public IActionResult AccountOverview()
         {
-            var userId = int.Parse(User.FindFirst("Id").Value);
-            var account = accountService.GetAccByUserId(userId);
+            var accountId = int.Parse(User.FindFirst("AccountId").Value);
+            var account = accountService.GetAccByAccountId(accountId);
 
             var converted = ConvertTo.AccountOverviewModel(account);
             return View(converted);
         }
 
         [HttpPost]
+        [Authorize(Policy = "Role")]
         public IActionResult TransferToAccount(int amount, string toAccount)
         {
-            var userId = int.Parse(User.FindFirst("Id").Value);
-            var account = accountService.GetAccByUserId(userId);
+            var accountId = int.Parse(User.FindFirst("AccountId").Value);
+            var account = accountService.GetAccByAccountId(accountId);
             var status = accountService.ValidateTransfer(amount, account);
             if (status.IsValid)
             {
@@ -50,11 +53,11 @@ namespace My_Expenses.Controllers
         {
             return View(result);
         }
-
+        [Authorize(Policy = "Role")]
         public IActionResult AddToMain(int amount)
         {
-            var userId = int.Parse(User.FindFirst("Id").Value);
-            var account = accountService.GetAccByUserId(userId);
+            var accountId = int.Parse(User.FindFirst("AccountId").Value);
+            var account = accountService.GetAccByAccountId(accountId);
 
             accountService.AddToMainAcc(amount, account);
 

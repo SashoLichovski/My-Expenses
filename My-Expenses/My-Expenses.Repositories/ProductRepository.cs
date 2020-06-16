@@ -16,6 +16,7 @@ namespace My_Expenses.Repositories
         {
             this.context = context;
         }
+        
         public void AddProduct(Product product)
         {
             context.Products.Add(product);
@@ -28,10 +29,10 @@ namespace My_Expenses.Repositories
             context.SaveChanges();
         }
 
-        public List<Product> GetAllByUserId(int userId)
+        public List<Product> GetAllByAccountId(int accountId)
         {
             return context.Products
-                .Where(x => x.UserId == userId)
+                .Where(x => x.AccountId == accountId)
                 .OrderByDescending(x => x.DateAdded)
                 .ToList();
         }
@@ -46,6 +47,5 @@ namespace My_Expenses.Repositories
             context.Products.Update(product);
             context.SaveChanges();
         }
-
     }
 }

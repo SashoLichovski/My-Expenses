@@ -18,9 +18,20 @@ namespace My_Expenses.Repositories
             this.context = context;
         }
 
-        public Account GetAccByUserId(int userId)
+        public void AddAccount(Account account)
         {
-            return context.Accounts.FirstOrDefault(x => x.UserId == userId);
+            context.Accounts.Add(account);
+        }
+
+        public Account GetAccByAccountId(int accountId)
+        {
+            return context.Accounts.FirstOrDefault(x => x.Id == accountId);
+        }
+
+        public Account GetLatest()
+        {
+            var acc = context.Accounts.OrderByDescending(x => x.DateCreated).Take(1).ToList();
+            return acc[0];
         }
 
         public void Update(Account account)

@@ -15,9 +15,12 @@ namespace My_Expenses.Services
     public class AuthService : IAuthService
     {
         public IUserRepository UserRepository { get; }
-        public AuthService(IUserRepository userRepository)
+        public IAccountRepository AccountRepository { get; }
+
+        public AuthService(IUserRepository userRepository, IAccountRepository accountRepository)
         {
             UserRepository = userRepository;
+            AccountRepository = accountRepository;
         }
 
         public async Task<bool> SignInAsync(User user, HttpContext httpContext)
@@ -30,7 +33,8 @@ namespace My_Expenses.Services
                     new Claim(ClaimTypes.NameIdentifier, getUser.Username),
                     new Claim(ClaimTypes.Name, getUser.Username),
                     new Claim("Id", getUser.Id.ToString()),
-                    new Claim("IsLoggedIn", "True")
+                    new Claim("Role", getUser.Role),
+                    new Claim("AccountId", getUser.AccountId.ToString())
                 };
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
@@ -52,12 +56,27 @@ namespace My_Expenses.Services
         }
         public void RegisterUser(User user)
         {
+            user.Role = "manager";
+            var account = new Account()
+            {
+                DateCreated = DateTime.Now
+            };
+            AccountRepository.AddAccount(account);
+            var acc = AccountRepository.GetLatest();
+            user.AccountId = acc.Id;
             UserRepository.Add(user);
         }
 
         public void SignOut(HttpContext httpContext)
         {
             httpContext.SignOutAsync();
+        }
+
+        public void RegisterEmployee(User user, int accountId)
+        {
+            user.Role = "employee";
+            user.AccountId = accountId;
+            UserRepository.Add(user);
         }
     }
 }

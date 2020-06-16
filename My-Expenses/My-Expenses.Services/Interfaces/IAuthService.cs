@@ -10,5 +10,6 @@ namespace My_Expenses.Services.Interfaces
         bool Validate(string username);
         void RegisterUser(User user);
         void SignOut(HttpContext httpContext);
+        void RegisterEmployee(User user, int accountId);
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace My_Expenses.Data
 {
@@ -15,7 +13,9 @@ namespace My_Expenses.Data
         public string Password { get; set; }
         [Required]
         public string EmailAdress { get; set; }
-        public List<Product> Products { get; set; }
+        [Required]
+        public string Role { get; set; }
+        public int AccountId { get; set; }
         public Account Account { get; set; }
     }
 }

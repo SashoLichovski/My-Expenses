@@ -23,14 +23,14 @@ namespace My_Expenses.Services
             accountRepository.Update(account);
         }
 
-        public Account GetAccByUserId(int userId)
+        public Account GetAccByAccountId(int accountId)
         {
-            return accountRepository.GetAccByUserId(userId);
+            return accountRepository.GetAccByAccountId(accountId);
         }
 
-        public void SubtractSpendingAccount(int price, int userId)
+        public void SubtractSpendingAccount(int price, int accountId)
         {
-            var account = accountRepository.GetAccByUserId(userId);
+            var account = accountRepository.GetAccByAccountId(accountId);
             account.SpendingAccount -= price;
             accountRepository.Update(account);
         }
@@ -50,10 +50,10 @@ namespace My_Expenses.Services
             }
         }
 
-        public AddProductStatus ValidateSpendingAccount(int price, int userId)
+        public AddProductStatus ValidateSpendingAccount(int price, int accountId)
         {
             var status = new AddProductStatus();
-            var account = accountRepository.GetAccByUserId(userId);
+            var account = accountRepository.GetAccByAccountId(accountId);
             if (account.SpendingAccount >= price)
             {
                 account.SpendingAccount -= price;

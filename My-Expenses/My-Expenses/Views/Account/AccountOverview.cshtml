@@ -8,11 +8,15 @@
 }
 <div class="overviewContainer">
 
-    <partial name="/Views/Account/PartialViews/_MainAccount.cshtml" for="MainAccount"/>
+    @if (User.FindFirst("Role").Value == "manager")
+    {
+        <partial name="/Views/Account/PartialViews/_MainAccount.cshtml" for="MainAccount"/>
+
+        <partial name="/Views/Account/PartialViews/_SavingsAccount.cshtml" for="SavingsAccount"/>
+    }
 
     <partial name="/Views/Account/PartialViews/_SpendingAccount.cshtml" for="SpendingAccount"/>
 
-    <partial name="/Views/Account/PartialViews/_SavingsAccount.cshtml" for="SpendingAccount"/>
 
 </div>
 @section Scripts{ 

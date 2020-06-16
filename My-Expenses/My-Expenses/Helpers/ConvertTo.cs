@@ -20,6 +20,7 @@ namespace My_Expenses.Helpers
                 Price = product.Price,
                 DateCreated = product.DateAdded.ToString("dddd, MMMM dd, yyyy"),
                 Category = product.Category,
+                BoughtBy = product.BoughtBy
             };
             if (!string.IsNullOrEmpty(product.Note))
             {

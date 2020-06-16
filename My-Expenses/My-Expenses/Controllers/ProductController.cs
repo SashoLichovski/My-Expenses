@@ -21,9 +21,8 @@ namespace My_Expenses.Controllers
         }
         public IActionResult HomePage()
         {
-            ViewBag.header = "All products";
-            var userId = int.Parse(User.FindFirst("Id").Value);
-            var products = productService.GetAllByUserId(userId);
+            var accountId = int.Parse(User.FindFirst("AccountId").Value);
+            var products = productService.GetAllByAccountId(accountId);
             var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
             var calculationData = productService.CalculateData(products);
             var dataModel = new HomePageCalculatedDataModel()
@@ -35,14 +34,14 @@ namespace My_Expenses.Controllers
         }
         public IActionResult CustomFilter(string category, DateTime dateFrom, DateTime dateTo, int priceFrom, int priceTo)
         {
-            var userId = int.Parse(User.FindFirst("Id").Value);
+            var accountId = int.Parse(User.FindFirst("AccountId").Value);
 
-            var isValid = productService.ValidateCustomFilter(dateFrom, dateTo, priceFrom, priceTo, userId);
+            var isValid = productService.ValidateCustomFilter(dateFrom, dateTo, priceFrom, priceTo, accountId, category);
             var dataModel = new HomePageCalculatedDataModel();
             if (isValid.IsValid)
             {
                 ViewBag.header = "Custom filter";
-                var products = productService.CustomFiltering(category, dateFrom, dateTo, priceFrom, priceTo, userId);
+                var products = productService.CustomFiltering(category, dateFrom, dateTo, priceFrom, priceTo, accountId);
                 var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
                 var calculationData = productService.CalculateData(products);
                 dataModel.Products = convertedList;
@@ -54,8 +53,8 @@ namespace My_Expenses.Controllers
         }
         public IActionResult FilterByTimeAndCategory(string time, int dateRange, string category)
         {
-            var userId = int.Parse(User.FindFirst("Id").Value);
-            var products = productService.FilterByTime(time, dateRange, category, userId);
+            var accountId = int.Parse(User.FindFirst("AccountId").Value);
+            var products = productService.FilterByTime(time, dateRange, category, accountId);
 
             var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
             var calculationData = productService.CalculateData(products);
@@ -77,13 +76,15 @@ namespace My_Expenses.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userId = int.Parse(User.FindFirst("Id").Value);
-                var status = accountService.ValidateSpendingAccount(addProductModel.Price, userId);
+                var accountId = int.Parse(User.FindFirst("AccountId").Value);
+                var userId = int.Parse(User.FindFirst("AccountId").Value);
+                var username = User.Identity.Name;
+                var status = accountService.ValidateSpendingAccount(addProductModel.Price, accountId);
                 if (status.IsValid)
                 {
-                    accountService.SubtractSpendingAccount(addProductModel.Price, userId);
+                    accountService.SubtractSpendingAccount(addProductModel.Price, accountId);
                     var product = ReverseModel.ToProduct(addProductModel);
-                    productService.CreateProduct(product, userId);
+                    productService.CreateProduct(product, accountId, userId, username);
                     var statusModel = ConvertTo.AddProductResultModel(status, addProductModel.Price, addProductModel.Name);
                     return RedirectToAction("AddProductResult", statusModel);
                 }
@@ -106,6 +107,7 @@ namespace My_Expenses.Controllers
             return View(converted);
         }
         [HttpPost]
+        [Authorize(Policy = "Role")]
         public IActionResult EditProduct(EditProductModel model)
         {
             if (ModelState.IsValid)

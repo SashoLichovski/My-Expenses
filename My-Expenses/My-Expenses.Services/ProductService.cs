@@ -35,7 +35,7 @@ namespace My_Expenses.Services
             return new CalculatedData();
         }
 
-        public void CreateProduct(Product product, int userId)
+        public void CreateProduct(Product product, int accountId, int userId, string username)
         {
             var newProduct = new Product()
             {
@@ -43,16 +43,17 @@ namespace My_Expenses.Services
                 Price = product.Price,
                 Category = product.Category,
                 DateAdded = DateTime.Now,
-                UserId = userId,
-                Note = product.Note
+                AccountId = accountId,
+                Note = product.Note,
+                BoughtBy = username
             };
             productRepository.AddProduct(newProduct);
         }
 
-        public List<Product> CustomFiltering(string category, DateTime dateFrom, DateTime dateTo, int priceFrom, int priceTo, int userId)
+        public List<Product> CustomFiltering(string category, DateTime dateFrom, DateTime dateTo, int priceFrom, int priceTo, int accountId)
         {
             var filteredByCategory = new List<Product>();
-            var allProducts = productRepository.GetAllByUserId(userId);
+            var allProducts = productRepository.GetAllByAccountId(accountId);
             if (category == "all")
             {
                 filteredByCategory = allProducts
@@ -73,12 +74,25 @@ namespace My_Expenses.Services
 
             return filteredByCategory;
         }
-        public CustomFilterValidation ValidateCustomFilter(DateTime dateFrom, DateTime dateTo, int priceFrom, int priceTo, int userId)
+        public CustomFilterValidation ValidateCustomFilter(DateTime dateFrom, DateTime dateTo, int priceFrom, int priceTo, int accountId, string category)
         {
             var validation = new CustomFilterValidation();
-            var allProducts = productRepository.GetAllByUserId(userId);
+            var allProducts = productRepository.GetAllByAccountId(accountId);
             var priceRange = allProducts.Where(x => x.Price >= priceFrom && x.Price <= priceTo).ToList();
             var dateRange = allProducts.Where(x => x.DateAdded >= dateFrom && x.DateAdded <= dateTo).ToList();
+            var categoryRange = new List<Product>();
+            if (category != "all")
+            {
+                categoryRange = allProducts.Where(x => x.Category == category &&
+                            x.DateAdded >= dateFrom && x.DateAdded <= dateTo &&
+                            x.Price >= priceFrom && x.Price <= priceTo)
+                        .OrderByDescending(x => x.DateAdded)
+                        .ToList();
+            }
+            else
+            {
+                categoryRange = allProducts;
+            }
             if (priceRange.Count == 0)
             {
                 validation.IsValid = false;
@@ -89,12 +103,22 @@ namespace My_Expenses.Services
                 validation.IsValid = false;
                 validation.NotValidMessage = "No products found in the date range you entered";
             }
-            if (priceRange.Count == 0 && dateRange.Count == 0)
+            if (categoryRange.Count == 0)
             {
                 validation.IsValid = false;
-                validation.NotValidMessage = "No products found in both price and date range";
+                validation.NotValidMessage = "No products found in this category for the given price range or date range";
             }
-            if(priceRange.Count > 0 && dateRange.Count > 0)
+            if (priceRange.Count == 0 && dateRange.Count == 0 && categoryRange.Count == 0)
+            {
+                validation.IsValid = false;
+                validation.NotValidMessage = "No products found in all fields ( date range, price range, category )";
+            }
+            if (priceRange.Count == 0 && dateRange.Count == 0 && categoryRange.Count > 0)
+            {
+                validation.IsValid = false;
+                validation.NotValidMessage = "No products found in requested price range and date range";
+            }
+            if (priceRange.Count > 0 && dateRange.Count > 0 && categoryRange.Count > 0)
             {
                 validation.IsValid = true;
             }
@@ -105,9 +129,9 @@ namespace My_Expenses.Services
             productRepository.DeleteProduct(product);
         }
 
-        public List<Product> GetAllByUserId(int userId)
+        public List<Product> GetAllByAccountId(int accountId)
         {
-            return productRepository.GetAllByUserId(userId);
+            return productRepository.GetAllByAccountId(accountId);
         }
 
         public Product GetById(int id)
@@ -122,11 +146,11 @@ namespace My_Expenses.Services
             product.Price = newPrice;
             productRepository.Update(product);
         }
-        public List<Product> FilterByTime(string time, int dateRange, string category, int userId)
+        public List<Product> FilterByTime(string time, int dateRange, string category, int accountId)
         {
             if (time == "month")
             {
-                var allProducts = productRepository.GetAllByUserId(userId)
+                var allProducts = productRepository.GetAllByAccountId(accountId)
                 .Where(x => x.DateAdded > DateTime.Now.AddMonths(-dateRange))
                 .ToList();
                 var filteredList = allProducts;
@@ -141,7 +165,7 @@ namespace My_Expenses.Services
             else if (time == "week")
             {
                 dateRange *= 7;
-                var allProducts = productRepository.GetAllByUserId(userId)
+                var allProducts = productRepository.GetAllByAccountId(accountId)
                     .Where(x => x.DateAdded > DateTime.Now.AddDays(-dateRange))
                     .ToList();
                 var filteredList = allProducts;
@@ -155,7 +179,7 @@ namespace My_Expenses.Services
             }
             else 
             {
-                var allProducts = productRepository.GetAllByUserId(userId)
+                var allProducts = productRepository.GetAllByAccountId(accountId)
                 .Where(x => x.DateAdded > DateTime.Now.AddDays(-dateRange))
                 .ToList();
                 var filteredList = allProducts;

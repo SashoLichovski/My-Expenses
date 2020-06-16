@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using My_Expenses.Helpers;
 using My_Expenses.Services.Interfaces;
 using My_Expenses.ViewModels.AuthModels;
+using My_Expenses.ViewModels.UserModel;
 
 namespace My_Expenses.Controllers
 {
@@ -68,6 +70,26 @@ namespace My_Expenses.Controllers
                 return View();
             }
             return View(registerModel);
+        }
+        [HttpPost]
+        [Authorize(Policy = "Role")]
+        public IActionResult RegisterEmployee(RegisterEmployeeModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool status = AuthService.Validate(model.Username);
+                if (status)
+                {
+                    var accountId = int.Parse(User.FindFirst("AccountId").Value);
+                    var converted = ReverseModel.ToUser(model);
+                    AuthService.RegisterEmployee(converted, accountId);
+
+                    return RedirectToAction("SuccessfulRegister");
+                }
+                ModelState.AddModelError(string.Empty, $"Username {model.Username} is already taken");
+                return View();
+            }
+            return View(model);
         }
         public IActionResult SuccessfulRegister()
         {

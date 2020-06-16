@@ -8,6 +8,7 @@
         public string DateCreated { get; set; }
         public string Category { get; set; }
         public string Note { get; set; }
+        public string BoughtBy { get; set; }
 
     }
 }

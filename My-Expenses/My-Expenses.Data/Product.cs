@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace My_Expenses.Data
 {
@@ -19,7 +17,11 @@ namespace My_Expenses.Data
         public DateTime DateAdded { get; set; }
         public string Note { get; set; }
 
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public int AccountId { get; set; }
+        public Account Account { get; set; }
+
+
+        public string BoughtBy { get; set; }
+
     }
 }

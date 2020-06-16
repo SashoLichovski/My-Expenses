@@ -10,8 +10,8 @@ using My_Expenses.Data;
 namespace My_Expenses.Data.Migrations
 {
     [DbContext(typeof(MyExpensesContext))]
-    [Migration("20200616115910_SpendingAccount")]
-    partial class SpendingAccount
+    [Migration("20200616200120_CreateDb")]
+    partial class CreateDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,13 +37,7 @@ namespace My_Expenses.Data.Migrations
                     b.Property<int>("SpendingAccount")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Accounts");
                 });
@@ -54,6 +48,12 @@ namespace My_Expenses.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BoughtBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Category")
                         .IsRequired()
@@ -69,15 +69,12 @@ namespace My_Expenses.Data.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Prize")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
+                    b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AccountId");
 
                     b.ToTable("Products");
                 });
@@ -89,11 +86,18 @@ namespace My_Expenses.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
                     b.Property<string>("EmailAdress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -103,23 +107,25 @@ namespace My_Expenses.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
-                });
+                    b.HasIndex("AccountId");
 
-            modelBuilder.Entity("My_Expenses.Data.Account", b =>
-                {
-                    b.HasOne("My_Expenses.Data.User", "User")
-                        .WithOne("Account")
-                        .HasForeignKey("My_Expenses.Data.Account", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("My_Expenses.Data.Product", b =>
                 {
-                    b.HasOne("My_Expenses.Data.User", "User")
+                    b.HasOne("My_Expenses.Data.Account", "Account")
                         .WithMany("Products")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("My_Expenses.Data.User", b =>
+                {
+                    b.HasOne("My_Expenses.Data.Account", "Account")
+                        .WithMany("Users")
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

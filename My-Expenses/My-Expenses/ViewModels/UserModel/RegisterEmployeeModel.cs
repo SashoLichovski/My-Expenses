@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace My_Expenses.ViewModels.AuthModels
+namespace My_Expenses.ViewModels.UserModel
 {
-    public class RegisterModel
+    public class RegisterEmployeeModel
     {
         [Required]
         public string Username { get; set; }

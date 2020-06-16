@@ -1,4 +1,7 @@
-﻿namespace My_Expenses.Data
+﻿using System;
+using System.Collections.Generic;
+
+namespace My_Expenses.Data
 {
     public class Account
     {
@@ -6,7 +9,8 @@
         public int MainAccount { get; set; }
         public int SavingsAccount { get; set; }
         public int SpendingAccount { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public List<Product> Products { get; set; }
+        public List<User> Users { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }

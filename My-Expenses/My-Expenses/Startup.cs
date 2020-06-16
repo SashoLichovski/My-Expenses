@@ -48,8 +48,8 @@ namespace My_Expenses
 
             services.AddAuthorization(options =>
             options.AddPolicy(
-                "IsLoggedIn",
-                    policy => policy.RequireClaim("IsLoggedIn", "True")
+                "Role",
+                    policy => policy.RequireClaim("Role", "manager")
                 ));
 
             services.AddTransient<IAuthService, AuthService>();

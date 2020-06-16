@@ -1,6 +1,7 @@
 ﻿using My_Expenses.Data;
 using My_Expenses.ViewModels.AuthModels;
 using My_Expenses.ViewModels.ProductModels;
+using My_Expenses.ViewModels.UserModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace My_Expenses.Helpers
 {
     public static class ReverseModel
     {
-        public static User ToUser(SignInModel model)
+        internal static User ToUser(SignInModel model)
         {
             return new User
             {
@@ -18,7 +19,7 @@ namespace My_Expenses.Helpers
                 Password = model.Password
             };
         }
-        public static User ToUser(RegisterModel model)
+        internal static User ToUser(RegisterModel model)
         {
             return new User
             {
@@ -27,7 +28,16 @@ namespace My_Expenses.Helpers
                 EmailAdress = model.EmailAdress
             };
         }
-        
+        internal static User ToUser(RegisterEmployeeModel model)
+        {
+            return new User
+            {
+                Username = model.Username,
+                Password = model.Password,
+                EmailAdress = model.EmailAdress
+            };
+        }
+
         public static Product ToProduct(AddProductModel model)
         {
             return new Product

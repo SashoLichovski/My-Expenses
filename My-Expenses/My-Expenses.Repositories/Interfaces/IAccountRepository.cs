@@ -7,7 +7,9 @@ namespace My_Expenses.Repositories.Interfaces
 {
     public interface IAccountRepository
     {
-        Account GetAccByUserId(int userId);
+        Account GetAccByAccountId(int accountId);
         void Update(Account account);
+        void AddAccount(Account account);
+        Account GetLatest();
     }
 }

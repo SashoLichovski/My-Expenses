@@ -10,8 +10,8 @@ using My_Expenses.Data;
 namespace My_Expenses.Data.Migrations
 {
     [DbContext(typeof(MyExpensesContext))]
-    [Migration("20200613161428_TableProducts")]
-    partial class TableProducts
+    [Migration("20200616210333_AccountDateCreated")]
+    partial class AccountDateCreated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,30 @@ namespace My_Expenses.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("My_Expenses.Data.Account", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MainAccount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SavingsAccount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SpendingAccount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Accounts");
+                });
+
             modelBuilder.Entity("My_Expenses.Data.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -28,27 +52,32 @@ namespace My_Expenses.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BoughtBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Category")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Prize")
-                        .HasColumnType("int");
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Tax")
-                        .HasColumnType("float");
-
-                    b.Property<int>("UserId")
+                    b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AccountId");
 
                     b.ToTable("Products");
                 });
@@ -60,11 +89,18 @@ namespace My_Expenses.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
                     b.Property<string>("EmailAdress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -74,14 +110,25 @@ namespace My_Expenses.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountId");
+
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("My_Expenses.Data.Product", b =>
                 {
-                    b.HasOne("My_Expenses.Data.User", "User")
+                    b.HasOne("My_Expenses.Data.Account", "Account")
                         .WithMany("Products")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("My_Expenses.Data.User", b =>
+                {
+                    b.HasOne("My_Expenses.Data.Account", "Account")
+                        .WithMany("Users")
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
