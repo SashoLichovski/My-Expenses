@@ -17,6 +17,13 @@ namespace My_Expenses.Services
             this.accountRepository = accountRepository;
         }
 
+        public void AddSalesToMainAccount(int dailySales, int accountId)
+        {
+            var acc = accountRepository.GetAccByAccountId(accountId);
+            acc.MainAccount += dailySales;
+            accountRepository.Update(acc);
+        }
+
         public void AddToMainAcc(int amount, Account account)
         {
             account.MainAccount += amount;

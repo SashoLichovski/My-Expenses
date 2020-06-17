@@ -1,6 +1,7 @@
 ﻿using My_Expenses.Data;
 using My_Expenses.ViewModels.AuthModels;
 using My_Expenses.ViewModels.ProductModels;
+using My_Expenses.ViewModels.SalesModels;
 using My_Expenses.ViewModels.UserModel;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,19 @@ namespace My_Expenses.Helpers
                 Password = model.Password,
                 EmailAdress = model.EmailAdress
             };
+        }
+
+        internal static Sale ToSale(AddSaleModel model)
+        {
+            var sale = new Sale()
+            {
+                DailySalesAmount = model.DailySales
+            };
+            if (!string.IsNullOrEmpty(model.Note))
+            {
+                sale.Note = model.Note;
+            }
+            return sale;
         }
 
         public static Product ToProduct(AddProductModel model)

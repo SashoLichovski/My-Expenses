@@ -77,14 +77,13 @@ namespace My_Expenses.Controllers
             if (ModelState.IsValid)
             {
                 var accountId = int.Parse(User.FindFirst("AccountId").Value);
-                var userId = int.Parse(User.FindFirst("AccountId").Value);
                 var username = User.Identity.Name;
                 var status = accountService.ValidateSpendingAccount(addProductModel.Price, accountId);
                 if (status.IsValid)
                 {
                     accountService.SubtractSpendingAccount(addProductModel.Price, accountId);
                     var product = ReverseModel.ToProduct(addProductModel);
-                    productService.CreateProduct(product, accountId, userId, username);
+                    productService.CreateProduct(product, accountId, username);
                     var statusModel = ConvertTo.AddProductResultModel(status, addProductModel.Price, addProductModel.Name);
                     return RedirectToAction("AddProductResult", statusModel);
                 }

@@ -14,11 +14,16 @@
 </header>
 
 <div class="formContainer">
-    <form asp-controller="Auth" asp-action="Register">
+    <form asp-controller="Auth" asp-action="RegisterEmployee">
+        <br />
         <input placeholder="Username" class="form-control" asp-for="@Model.Username" />
+        <br />
         <input placeholder="Password" type="password" class="form-control" asp-for="@Model.Password" />
+        <br />
         <input placeholder="Confirm password" type="password" class="form-control" asp-for="@Model.ConfirmPassword" />
+        <br />
         <input placeholder="Email adress" class="form-control" asp-for="@Model.EmailAdress" />
+        <br />
         <input type="submit" value="Register" class="btn btn-dark form-control" />
     </form>
     <div class="registerLinkContainer">

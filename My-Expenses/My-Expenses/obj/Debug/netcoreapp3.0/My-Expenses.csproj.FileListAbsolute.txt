@@ -182,6 +182,7 @@ C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcore
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\PartialViews\CalculatedInfoTable.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\PartialViews\DisplayProducts.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\PartialViews\Sidebar.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Sales\AddSale.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\User\RegisterNewEmployee.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\My-Expenses.RazorTargetAssemblyInfo.cache
@@ -190,3 +191,4 @@ C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcore
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\My-Expenses.csproj.CopyComplete
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\My-Expenses.dll
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\My-Expenses.pdb
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Sales\SalesOverview.cshtml.g.cs

@@ -21,6 +21,7 @@ namespace My_Expenses.Repositories
         public void AddAccount(Account account)
         {
             context.Accounts.Add(account);
+            context.SaveChanges();
         }
 
         public Account GetAccByAccountId(int accountId)

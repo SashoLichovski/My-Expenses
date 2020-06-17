@@ -55,10 +55,12 @@ namespace My_Expenses
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<ISalesService, SalesService>();
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<ISalesRepository, SalesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,24 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model My_Expenses.ViewModels.SalesModels.AddSaleModel
+@{
+    Layout = "_Layout";
+}
+@section Styles {
+    <link href="~/css/DefaultForm/form.css" rel="stylesheet" />
+}
+
+<div class="formContainer">
+    <form asp-action="AddSale">
+
+        <p>Your daily sales amount</p>
+        <input placeholder="Your daily sales" type="number" class="form-control" asp-for="@Model.DailySales" />
+
+        <br />
+        <textarea placeholder="Note ( not required )" class="form-control"></textarea>
+
+        <br />
+        <input type="submit" value="Add your sales" class="btn btn-dark form-control" />
+    </form>
+    <div class="text-danger" asp-validation-summary="All"></div>
+</div>
+

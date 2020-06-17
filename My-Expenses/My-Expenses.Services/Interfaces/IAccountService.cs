@@ -11,5 +11,6 @@ namespace My_Expenses.Services.Interfaces
         void AddToMainAcc(int amount, Account account);
         AddProductStatus ValidateSpendingAccount(int price, int accountId);
         void SubtractSpendingAccount(int price, int accountId);
+        void AddSalesToMainAccount(int dailySales, int accountId);
     }
 }

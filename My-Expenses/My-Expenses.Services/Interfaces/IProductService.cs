@@ -7,7 +7,7 @@ namespace My_Expenses.Services.Interfaces
 {
     public interface IProductService
     {
-        void CreateProduct(Product product,int accountId, int userId, string username);
+        void CreateProduct(Product product,int accountId, string username);
         List<Product> GetAllByAccountId(int accountId);
         Product GetById(int id);
         void DeleteProduct(Product product);

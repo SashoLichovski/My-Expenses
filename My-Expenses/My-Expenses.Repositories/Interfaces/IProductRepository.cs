@@ -10,5 +10,6 @@ namespace My_Expenses.Repositories.Interfaces
         Product GetById(int id);
         void DeleteProduct(Product product);
         void Update(Product product);
+        void Populate();
     }
 }

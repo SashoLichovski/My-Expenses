@@ -10,8 +10,8 @@ using My_Expenses.Data;
 namespace My_Expenses.Data.Migrations
 {
     [DbContext(typeof(MyExpensesContext))]
-    [Migration("20200616210333_AccountDateCreated")]
-    partial class AccountDateCreated
+    [Migration("20200617140408_NewRelations")]
+    partial class NewRelations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,6 +82,35 @@ namespace My_Expenses.Data.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("My_Expenses.Data.Sale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DailySalesAmount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmployeeUsername")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Sales");
+                });
+
             modelBuilder.Entity("My_Expenses.Data.User", b =>
                 {
                     b.Property<int>("Id")
@@ -119,6 +148,15 @@ namespace My_Expenses.Data.Migrations
                 {
                     b.HasOne("My_Expenses.Data.Account", "Account")
                         .WithMany("Products")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("My_Expenses.Data.Sale", b =>
+                {
+                    b.HasOne("My_Expenses.Data.Account", "Account")
+                        .WithMany("Sales")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -1,0 +1,55 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<My_Expenses.ViewModels.SalesModels.SalesOverviewModel>
+@{
+    ViewData["Title"] = "SalesOverview";
+    Layout = "_Layout";
+}
+@section Styles{
+    <link rel="stylesheet" href="~/css/DefaultTable/Table.css" />
+}
+<div class="contentContainer">
+    <div class="scrollContainer">
+        <table class="defaultTable">
+            <thead>
+                <tr>
+                    <th>Employee username</th>
+                    <th>Daily sales</th>
+                    <th>Date added</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var sale in Model)
+                {
+                    <tr onclick="ToggleNote(event)">
+                        <td>@sale.EmployeeUsername</td>
+                        <td>@sale.DailySalesAmount</td>
+                        <td>@sale.DateCreated</td>
+                        @if (!string.IsNullOrEmpty(sale.Note))
+                        {
+                            <td class="checkedIcon"><i class="fas fa-check"></i></td>
+                        }
+                        else
+                        {
+                            <td><i class="fas fa-times"></i></td>
+                        }
+                    </tr>
+                    if (!string.IsNullOrEmpty(sale.Note))
+                    {
+                        <tr class="productNote">
+                            <td colspan="4">@sale.Note</td>
+                            @*<td>
+                                    <a asp-action="EditNote" asp-route-id="@sale.Id">Edit note</a>
+                                </td>*@
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/Sidebar.js"></script>
+    <script src="~/js/Table.js"></script>
+    <script src="https://kit.fontawesome.com/15dcd5d68f.js" crossorigin="anonymous"></script>
+}

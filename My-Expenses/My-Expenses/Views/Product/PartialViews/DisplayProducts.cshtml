@@ -1,7 +1,7 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="scrollContainer">
-    <table class="homePageTable">
+    <table class="defaultTable">
         <thead>
             <tr>
                 <th>Name</th>
@@ -50,7 +50,7 @@
                 if (!string.IsNullOrEmpty(product.Note))
                 {
                     <tr class="productNote">
-                        <td colspan="5">@product.Note</td>
+                        <td colspan="6">@product.Note</td>
                         <td>
                             <a asp-action="EditNote" asp-route-id="@product.Id">Edit note</a>
                         </td>

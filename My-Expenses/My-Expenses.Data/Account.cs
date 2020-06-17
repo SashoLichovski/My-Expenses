@@ -11,6 +11,7 @@ namespace My_Expenses.Data
         public int SpendingAccount { get; set; }
         public List<Product> Products { get; set; }
         public List<User> Users { get; set; }
+        public List<Sale> Sales { get; set; }
         public DateTime DateCreated { get; set; }
     }
 }

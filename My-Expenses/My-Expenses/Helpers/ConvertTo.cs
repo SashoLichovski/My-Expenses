@@ -6,6 +6,7 @@ using My_Expenses.Data;
 using My_Expenses.Services.Dto;
 using My_Expenses.ViewModels.AccountModels;
 using My_Expenses.ViewModels.ProductModels;
+using My_Expenses.ViewModels.SalesModels;
 
 namespace My_Expenses.Helpers
 {
@@ -48,6 +49,17 @@ namespace My_Expenses.Helpers
                 ResultMessage = status.ResultMessage,
                 AmountTransfered = amount,
                 AmountLeft = leftOnAcc
+            };
+        }
+
+        internal static SalesOverviewModel SalesOverviewModel(Sale salesList)
+        {
+            return new SalesOverviewModel
+            {
+                DailySalesAmount = salesList.DailySalesAmount,
+                EmployeeUsername = salesList.EmployeeUsername,
+                Note = salesList.Note,
+                DateCreated = salesList.DateCreated.ToString("dddd, MMMM dd, yyyy")
             };
         }
 

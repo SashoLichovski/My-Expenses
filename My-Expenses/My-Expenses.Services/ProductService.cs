@@ -12,6 +12,8 @@ namespace My_Expenses.Services
     {
         private readonly IProductRepository productRepository;
 
+        public ISalesRepository SalesRepository { get; }
+
         public ProductService(IProductRepository productRepository)
         {
             this.productRepository = productRepository;
@@ -35,7 +37,7 @@ namespace My_Expenses.Services
             return new CalculatedData();
         }
 
-        public void CreateProduct(Product product, int accountId, int userId, string username)
+        public void CreateProduct(Product product, int accountId, string username)
         {
             var newProduct = new Product()
             {

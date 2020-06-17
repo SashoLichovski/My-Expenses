@@ -29,5 +29,10 @@ namespace My_Expenses.Repositories
             Context.Users.Add(user);
             Context.SaveChanges();
         }
+
+        public User GetById(int userId)
+        {
+            return Context.Users.FirstOrDefault(x => x.Id == userId);
+        }
     }
 }
