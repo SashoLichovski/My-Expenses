@@ -1,10 +1,8 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model My_Expenses.ViewModels.UserModel.RegisterEmployeeModel
+@model My_Expenses.ViewModels.AuthModels.RegisterModel
 @{
-    ViewData["Title"] = "RegisterNewEmployee";
     Layout = "_Layout";
 }
-
 @section Styles {
     <link href="~/css/DefaultForm/form.css" rel="stylesheet" />
 }
@@ -14,7 +12,7 @@
 </header>
 
 <div class="formContainer">
-    <form asp-controller="Auth" asp-action="RegisterEmployee">
+    <form asp-action="Register">
         <br />
         <input placeholder="Username" class="form-control" asp-for="@Model.Username" />
         <br />
@@ -27,7 +25,7 @@
         <input type="submit" value="Register" class="btn btn-dark form-control" />
     </form>
     <div class="registerLinkContainer">
-        <p>Back to <a asp-action="SignIn">Sign in</a></p>
+        <p>Back to <a asp-controller="Auth" asp-action="SignIn">Sign in</a></p>
     </div>
     <div class="text-danger" asp-validation-summary="All"></div>
 </div>

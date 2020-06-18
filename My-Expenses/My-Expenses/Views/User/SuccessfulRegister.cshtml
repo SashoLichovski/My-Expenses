@@ -16,7 +16,15 @@
     </style>
 }
 <div id="msgContainer">
-    <h2>You have been successfully registered !</h2>
-    <a asp-action="SignIn">Proceed to sign in</a>
+    @if (User.FindFirst("Role").Value == "manager")
+    {
+        <h2>Employee successfully added</h2>
+        <a asp-controller="Product" asp-action="HomePage">Back to home page</a>
+    }
+    else
+    {
+        <h2>You have been successfully registered !</h2>
+        <a asp-controller="Auth" asp-action="SignIn">Proceed to sign in</a>
+    }
 </div>
 

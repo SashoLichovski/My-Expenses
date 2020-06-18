@@ -45,38 +45,11 @@ namespace My_Expenses.Services
             }
             return false;
         }
-        public bool Validate(string username)
-        {
-            var user = UserRepository.GetByUsername(username);
-            if (user == null)
-            {
-                return true;
-            }
-            return false;
-        }
-        public void RegisterUser(User user)
-        {
-            user.Role = "manager";
-            var account = new Account()
-            {
-                DateCreated = DateTime.Now
-            };
-            AccountRepository.AddAccount(account);
-            var acc = AccountRepository.GetLatest();
-            user.AccountId = acc.Id;
-            UserRepository.Add(user);
-        }
-
+        
         public void SignOut(HttpContext httpContext)
         {
             httpContext.SignOutAsync();
         }
 
-        public void RegisterEmployee(User user, int accountId)
-        {
-            user.Role = "employee";
-            user.AccountId = accountId;
-            UserRepository.Add(user);
-        }
     }
 }

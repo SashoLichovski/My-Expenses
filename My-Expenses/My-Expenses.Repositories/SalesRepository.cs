@@ -85,5 +85,12 @@ namespace My_Expenses.Repositories
                 .OrderByDescending(x => x.DateCreated)
                 .ToList();
         }
+
+        public List<Sale> GetAllForUser(int accountId, string employeeUsername)
+        {
+            return context.Sales
+                .Where(x => x.AccountId == accountId && x.EmployeeUsername == employeeUsername)
+                .ToList();
+        }
     }
 }

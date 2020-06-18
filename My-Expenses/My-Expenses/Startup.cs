@@ -52,6 +52,7 @@ namespace My_Expenses
                     policy => policy.RequireClaim("Role", "manager")
                 ));
 
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IAccountService, AccountService>();

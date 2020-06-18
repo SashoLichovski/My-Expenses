@@ -49,51 +49,5 @@ namespace My_Expenses.Controllers
             AuthService.SignOut(HttpContext);
             return RedirectToAction("SignIn");
         }
-        public IActionResult Register()
-        {
-            var model = new RegisterModel();
-            return View(model);
-        }
-        [HttpPost]
-        public IActionResult Register(RegisterModel registerModel)
-        {
-            if (ModelState.IsValid)
-            {
-                bool status = AuthService.Validate(registerModel.Username);
-                if (status)
-                {
-                    var converted = ReverseModel.ToUser(registerModel);
-                    AuthService.RegisterUser(converted);
-                    return RedirectToAction("SuccessfulRegister");
-                }
-                ModelState.AddModelError(string.Empty, $"Username {registerModel.Username} is already taken");
-                return View();
-            }
-            return View(registerModel);
-        }
-        [HttpPost]
-        [Authorize(Policy = "Role")]
-        public IActionResult RegisterEmployee(RegisterEmployeeModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                bool status = AuthService.Validate(model.Username);
-                if (status)
-                {
-                    var accountId = int.Parse(User.FindFirst("AccountId").Value);
-                    var converted = ReverseModel.ToUser(model);
-                    AuthService.RegisterEmployee(converted, accountId);
-
-                    return RedirectToAction("SuccessfulRegister");
-                }
-                ModelState.AddModelError(string.Empty, $"Username {model.Username} is already taken");
-                return View();
-            }
-            return View(model);
-        }
-        public IActionResult SuccessfulRegister()
-        {
-            return View();
-        }
     }
 }

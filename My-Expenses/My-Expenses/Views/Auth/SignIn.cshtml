@@ -25,7 +25,7 @@
         <input type="submit" value="Sign in" class="btn btn-dark form-control" />
     </form>
     <div class="registerLinkContainer">
-        <p>If you don't have an account, please <a asp-action="Register">Register</a></p>
+        <p>If you don't have an account, please <a asp-controller="User" asp-action="Register">Register</a></p>
     </div>
     <div class="text-danger" asp-validation-summary="All"></div>
 </div>

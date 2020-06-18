@@ -6,10 +6,7 @@
             <tr>
                 <th>Name</th>
                 <th>Price</th>
-                @if (User.FindFirst("Role").Value == "manager")
-                {
-                    <th>By employee</th>
-                }
+                <th>By employee</th>
                 <th>Date added</th>
                 <th>Category</th>
                 <th>Notes</th>
@@ -22,38 +19,42 @@
         <tbody>
             @foreach (var product in @Model)
             {
-                <tr onclick="ToggleNote(event)">
-                    <td>@product.Name</td>
-                    <td>@product.Price den.</td>
-                    @if (User.FindFirst("Role").Value == "manager")
-                    {
-                        <td>@product.BoughtBy</td>
-                    }
-                    <td>@product.DateCreated</td>
-                    <td>@product.Category</td>
-                    @if (!string.IsNullOrEmpty(product.Note))
-                    {
-                        <td class="checkedIcon"><i class="fas fa-check"></i></td>
-                    }
-                    else
-                    {
-                        <td><i class="fas fa-times"></i></td>
-                    }
-                    @if (User.FindFirst("Role").Value == "manager")
-                    {
-                        <td>
-                            <a asp-action="EditProduct" asp-route-id="@product.Id">Edit</a> |
-                            <a asp-action="RemoveProduct" asp-route-id="@product.Id" onclick="return confirm(`Confirm delete action`)">Delete</a>
-                        </td>
-                    }
-                </tr>
+            <tr onclick="ToggleNote(event)">
+                <td>@product.Name</td>
+                <td>@product.Price den.</td>
+                <td>@product.BoughtBy</td>
+                <td>@product.DateCreated</td>
+                <td>@product.Category</td>
+                @if (!string.IsNullOrEmpty(product.Note) && User.Identity.Name == product.BoughtBy)
+                {
+                    <td class="checkedIcon"><i class="fas fa-check"></i></td>
+                }
+                else if (!string.IsNullOrEmpty(product.Note) && User.FindFirst("Role").Value == "manager")
+                {
+                    <td class="checkedIcon"><i class="fas fa-check"></i></td>
+                }
+                else
+                {
+                    <td><i class="fas fa-times"></i></td>
+                }
+                @if (User.FindFirst("Role").Value == "manager")
+                {
+                    <td>
+                        <a asp-action="EditProduct" asp-route-id="@product.Id">Edit</a> |
+                        <a asp-action="RemoveProduct" asp-route-id="@product.Id" onclick="return confirm(`Confirm delete action`)">Delete</a>
+                    </td>
+                }
+            </tr>
                 if (!string.IsNullOrEmpty(product.Note))
                 {
                     <tr class="productNote">
-                        <td colspan="6">@product.Note</td>
-                        <td>
-                            <a asp-action="EditNote" asp-route-id="@product.Id">Edit note</a>
-                        </td>
+                        <td colspan="5">@product.Note</td>
+                        @if (User.Identity.Name == product.BoughtBy || User.FindFirst("Role").Value == "manager")
+                        {
+                            <td>
+                                <a asp-action="EditNote" asp-route-id="@product.Id">Edit note</a>
+                            </td>
+                        }
                     </tr>
                 }
             }

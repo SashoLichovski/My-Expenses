@@ -44,7 +44,8 @@ namespace My_Expenses.Controllers
         public IActionResult SalesOverview()
         {
             var accountId = int.Parse(User.FindFirst("accountId").Value);
-            var salesList = salesService.GetAll(accountId);
+            var EmployeeUsername = User.Identity.Name;
+            var salesList = salesService.GetAllForUser(accountId, EmployeeUsername);
             var convertedList = new List<SalesOverviewModel>();
             foreach (var s in salesList)
             {

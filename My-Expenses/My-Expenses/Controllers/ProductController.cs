@@ -23,8 +23,10 @@ namespace My_Expenses.Controllers
         {
             var accountId = int.Parse(User.FindFirst("AccountId").Value);
             var products = productService.GetAllByAccountId(accountId);
+
             var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
             var calculationData = productService.CalculateData(products);
+            
             var dataModel = new HomePageCalculatedDataModel()
             {
                 Products = convertedList,

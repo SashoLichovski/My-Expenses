@@ -35,5 +35,10 @@ namespace My_Expenses.Services
         {
             return salesRepository.GetAll(accountId);
         }
+
+        public List<Sale> GetAllForUser(int accountId, string employeeUsername)
+        {
+            return salesRepository.GetAllForUser(accountId, employeeUsername);
+        }
     }
 }

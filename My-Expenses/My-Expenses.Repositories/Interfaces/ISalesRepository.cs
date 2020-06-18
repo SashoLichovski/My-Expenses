@@ -10,5 +10,6 @@ namespace My_Expenses.Repositories.Interfaces
         void Add(Sale dbSale);
         void Populate();
         List<Sale> GetAll(int accountId);
+        List<Sale> GetAllForUser(int accountId, string employeeUsername);
     }
 }

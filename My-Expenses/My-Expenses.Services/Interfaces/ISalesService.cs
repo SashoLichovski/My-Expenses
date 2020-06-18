@@ -8,5 +8,6 @@ namespace My_Expenses.Services.Interfaces
     {
         void CreateSale(Sale sale, int userId, int accountId);
         List<Sale> GetAll(int accountId);
+        List<Sale> GetAllForUser(int accountId, string employeeUsername);
     }
 }

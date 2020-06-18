@@ -30,7 +30,8 @@
                             <a class="dropdown-item" asp-controller="Sales" asp-action="AddSale">Add daily sales</a>
                             @if (User.FindFirst("Role").Value == "manager")
                             {
-                                <a class="dropdown-item" asp-controller="User" asp-action="RegisterNewEmployee">Add employee</a>
+                                <a class="dropdown-item" asp-controller="User" asp-action="RegisterEmployee">Add employee</a>
+                                <a class="dropdown-item" asp-controller="Sales" asp-action="EmployeeSalesOverview">Employee overview</a>
                             }
                             <a class="dropdown-item" asp-controller="Account" asp-action="AccountOverview">My account</a>
                             <a class="dropdown-item" asp-controller="Auth" asp-action="SignOut">Sign out</a>
