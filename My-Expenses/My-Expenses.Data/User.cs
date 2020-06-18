@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace My_Expenses.Data
@@ -15,6 +16,7 @@ namespace My_Expenses.Data
         public string EmailAdress { get; set; }
         [Required]
         public string Role { get; set; }
+        public DateTime DateCreated { get; set; }
         public int AccountId { get; set; }
         public Account Account { get; set; }
     }

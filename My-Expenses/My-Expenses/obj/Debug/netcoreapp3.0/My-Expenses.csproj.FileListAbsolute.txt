@@ -193,3 +193,4 @@ C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcore
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\User\RegisterEmployee.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\User\SuccessfulRegister.cshtml.g.cs
 C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\User\EmployeeOverview.cshtml.g.cs
+C:\Users\Sasho\Desktop\MVC\My-Expenses\My-Expenses\My-Expenses\obj\Debug\netcoreapp3.0\Razor\Views\Product\FilterByEmployee.cshtml.g.cs

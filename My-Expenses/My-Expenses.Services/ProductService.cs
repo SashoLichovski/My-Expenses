@@ -201,5 +201,10 @@ namespace My_Expenses.Services
             dbProduct.Note = product.Note;
             productRepository.Update(dbProduct);
         }
+
+        public List<Product> FilterByEmployee(string username)
+        {
+            return productRepository.FilterByEmployee(username);
+        }
     }
 }

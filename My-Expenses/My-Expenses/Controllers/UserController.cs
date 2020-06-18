@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using My_Expenses.Helpers;
@@ -76,10 +78,10 @@ namespace My_Expenses.Controllers
             var accountId = int.Parse(User.FindFirst("accountId").Value);
             var allSales = salesService.GetAll(accountId);
             var allProducts = productService.GetAllByAccountId(accountId);
-            var data = userService.EmployeeOverviewData(allSales, allProducts);
-            // Convert data to model
-            // Add to view and display
-            return View();
+            var dataList = userService.EmployeeOverviewData(allSales, allProducts);
+            var dataListModel = new List<UserOverviewDataModel>();
+            dataListModel = dataList.Select(x => ConvertTo.UserOverviewDataModel(x)).ToList();
+            return View(dataListModel);
         }
     }
 }

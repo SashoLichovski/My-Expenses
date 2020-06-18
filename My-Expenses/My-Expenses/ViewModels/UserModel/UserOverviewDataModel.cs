@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace My_Expenses.Services.Dto.UserDtoModels
+namespace My_Expenses.ViewModels.UserModel
 {
-    public class UserOverviewData
+    public class UserOverviewDataModel
     {
         public int Id { get; set; }
         public string EmployeeUsername { get; set; }

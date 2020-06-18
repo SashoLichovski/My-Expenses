@@ -1,11 +1,11 @@
 ﻿var sidebar = document.getElementById("sidebarContainer");
-sidebar.style.top = "-400px"
+sidebar.style.top = "-450px"
 function ToggleSidebar() {
 
-    if (sidebar.style.top == "-400px") {
+    if (sidebar.style.top == "-450px") {
         sidebar.style.top = "55px"
     } else {
-        sidebar.style.top = "-400px"
+        sidebar.style.top = "-450px"
     }
     if (document.getElementById("customFilterForm").style.display == "block") {
         document.getElementById("customFilterForm").style.display = "none"
@@ -19,6 +19,9 @@ function ToggleSidebar() {
     if (document.getElementById("formByDay").style.display == "block") {
         document.getElementById("formByDay").style.display = "none"
     }
+    if (document.getElementById("formByEmployee").style.display == "block") {
+        document.getElementById("formByEmployee").style.display = "none"
+    }
 }
 
 var customFilterForm = document.getElementById("customFilterForm");
@@ -31,6 +34,9 @@ var formByWeek = document.getElementById("formByWeek");
 formByWeek.style.display = "none";
 
 var formByWeek = document.getElementById("formByDay");
+formByWeek.style.display = "none";
+
+var formByWeek = document.getElementById("formByEmployee");
 formByWeek.style.display = "none";
 
 function ToggleForm(id) {

@@ -17,5 +17,6 @@ namespace My_Expenses.Services.Interfaces
         CustomFilterValidation ValidateCustomFilter(DateTime dateFrom, DateTime dateTo, int priceFrom, int priceTo, int userId, string category);
         List<Product> FilterByTime(string time, int dateRange, string category, int accountId);
         void UpdateNote(Product product);
+        List<Product> FilterByEmployee(string username);
     }
 }

@@ -10,5 +10,6 @@ namespace My_Expenses.ViewModels.ProductModels
         public List<HomePageModel> Products { get; set; }
         public CalculatedDataModel Data { get; set; }
         public string ErrorMessage { get; set; }
+        public List<string> EmployeeUsernames { get; set; }
     }
 }

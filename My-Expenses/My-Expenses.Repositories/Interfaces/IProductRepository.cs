@@ -11,5 +11,6 @@ namespace My_Expenses.Repositories.Interfaces
         void DeleteProduct(Product product);
         void Update(Product product);
         void Populate();
+        List<Product> FilterByEmployee(string username);
     }
 }

@@ -1,5 +1,5 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
+@model List<My_Expenses.ViewModels.UserModel.UserOverviewDataModel>
 @{
     ViewData["Title"] = "EmployeeOverview";
     Layout = "_Layout";
@@ -20,17 +20,26 @@
             <tr>
                 <th>Id</th>
                 <th>Employee username</th>
-                <th>Total expenses</th>
+                <th>Starting date</th>
                 <th>Total daily sales</th>
+                <th>Total expenses</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>andrej</td>
-                <td>2000</td>
-                <td>5000</td>
-            </tr>
+            @foreach (var x in Model)
+            {
+                <tr>
+                    <td>@x.Id</td>
+                    <td>@x.EmployeeUsername</td>
+                    <td>@x.FirstSale.ToString("dddd, MMMM dd, yyyy")</td>
+                    <td>@x.TotalDailySales</td>
+                    <td>@x.TotalExpenses</td>
+                    <td>
+                        <a asp-action="EmployeeHistory">See history</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 

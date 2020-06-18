@@ -29,6 +29,11 @@ namespace My_Expenses.Repositories
             context.SaveChanges();
         }
 
+        public List<Product> FilterByEmployee(string username)
+        {
+            return context.Products.Where(x => x.BoughtBy == username).ToList();
+        }
+
         public List<Product> GetAllByAccountId(int accountId)
         {
             return context.Products

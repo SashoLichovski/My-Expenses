@@ -30,7 +30,7 @@
                     <input type="number" class="form-control" id="priceFrom" name="priceFrom" required />
                     <span class="text-light">Maximum price</span>
                     <input type="number" class="form-control" id="priceTo" name="priceTo" required />
-                    
+
                     <input type="submit" class="btn btn-outline-success form-control" value="Filter" />
 
                 </form>
@@ -118,9 +118,29 @@
                     <input type="submit" class="btn btn-outline-success form-control" value="Filter" />
                 </form>
 
-            @*By days -----------------------------------------------------------*@
+            </div>
 
-        </div>
+            @*By employee -----------------------------------------------------------*@
+            <div class="optionContainer">
+
+                <div class="dropDownMenu" onclick="ToggleForm(`formByEmployee`)">
+                    <h5>By employee <i class='fas fa-caret-down' style='font-size:24px'></i></h5>
+                </div>
+
+                <form class="filterForm" id="formByEmployee" asp-controller="Product" asp-action="FilterByEmployee">
+                    <select id="username" name="username" class="form-control">
+                        @foreach (var username in Model)
+                        {
+                            <option value="@username">@username</option>
+                        }
+                    </select>
+
+                    <input type="submit" class="btn btn-outline-success form-control" value="Filter" />
+                </form>
+
+            </div>
+             
+
         </div>
     </div>
 </div>

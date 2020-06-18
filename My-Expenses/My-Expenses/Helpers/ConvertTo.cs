@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using My_Expenses.Data;
+﻿using My_Expenses.Data;
 using My_Expenses.Services.Dto;
+using My_Expenses.Services.Dto.UserDtoModels;
 using My_Expenses.ViewModels.AccountModels;
 using My_Expenses.ViewModels.ProductModels;
 using My_Expenses.ViewModels.SalesModels;
+using My_Expenses.ViewModels.UserModel;
 
 namespace My_Expenses.Helpers
 {
@@ -100,6 +98,18 @@ namespace My_Expenses.Helpers
             return new EditNoteModel
             {
                 Note = product.Note
+            };
+        }
+
+        internal static UserOverviewDataModel UserOverviewDataModel(UserOverviewData model)
+        {
+            return new UserOverviewDataModel
+            {
+                Id = model.Id,
+                EmployeeUsername = model.EmployeeUsername,
+                TotalDailySales = model.TotalDailySales,
+                TotalExpenses = model.TotalExpenses,
+                FirstSale = model.FirstSale
             };
         }
     }

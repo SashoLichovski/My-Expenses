@@ -50,22 +50,22 @@
             </tr>
                 if (!string.IsNullOrEmpty(product.Note))
                 {
-        <tr class="productNote">
-            @if (User.FindFirst("Role").Value != "manager")
-            {
-                <td colspan="5">@product.Note</td>
-            }
-            else
-            {
-                <td colspan="6">@product.Note</td>
-            }
-            @if (User.Identity.Name == product.BoughtBy || User.FindFirst("Role").Value == "manager")
-            {
-                <td>
-                    <a asp-action="EditNote" asp-route-id="@product.Id">Edit note</a>
-                </td>
-            }
-        </tr>
+                <tr class="productNote">
+                    @if (User.FindFirst("Role").Value != "manager")
+                    {
+                        <td colspan="5">@product.Note</td>
+                    }
+                    else
+                    {
+                        <td colspan="6">@product.Note</td>
+                    }
+                    @if (User.Identity.Name == product.BoughtBy || User.FindFirst("Role").Value == "manager")
+                    {
+                        <td>
+                            <a asp-action="EditNote" asp-route-id="@product.Id">Edit note</a>
+                        </td>
+                    }
+                </tr>
                 }
             }
             

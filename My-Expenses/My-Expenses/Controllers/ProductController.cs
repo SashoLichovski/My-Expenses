@@ -13,11 +13,13 @@ namespace My_Expenses.Controllers
     {
         private readonly IProductService productService;
         private readonly IAccountService accountService;
+        private readonly IUserService userService;
 
-        public ProductController(IProductService productService, IAccountService accountService)
+        public ProductController(IProductService productService, IAccountService accountService, IUserService userService)
         {
             this.productService = productService;
             this.accountService = accountService;
+            this.userService = userService;
         }
         public IActionResult HomePage()
         {
@@ -26,11 +28,13 @@ namespace My_Expenses.Controllers
 
             var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
             var calculationData = productService.CalculateData(products);
-            
+
+            var users = userService.GetAllEmployees(accountId);
             var dataModel = new HomePageCalculatedDataModel()
             {
                 Products = convertedList,
-                Data = ConvertTo.CalculatedDataModel(calculationData)
+                Data = ConvertTo.CalculatedDataModel(calculationData),
+                EmployeeUsernames = users.Select(x => x.Username).ToList()
             };
             return View(dataModel);
         }
@@ -38,9 +42,9 @@ namespace My_Expenses.Controllers
         {
             var accountId = int.Parse(User.FindFirst("AccountId").Value);
 
-            var isValid = productService.ValidateCustomFilter(dateFrom, dateTo, priceFrom, priceTo, accountId, category);
+            var status = productService.ValidateCustomFilter(dateFrom, dateTo, priceFrom, priceTo, accountId, category);
             var dataModel = new HomePageCalculatedDataModel();
-            if (isValid.IsValid)
+            if (status.IsValid)
             {
                 ViewBag.header = "Custom filter";
                 var products = productService.CustomFiltering(category, dateFrom, dateTo, priceFrom, priceTo, accountId);
@@ -50,7 +54,7 @@ namespace My_Expenses.Controllers
                 dataModel.Data = ConvertTo.CalculatedDataModel(calculationData);
                 return View(dataModel);
             }
-            dataModel.ErrorMessage = isValid.NotValidMessage;
+            dataModel.ErrorMessage = status.NotValidMessage;
             return View(dataModel);
         }
         public IActionResult FilterByTimeAndCategory(string time, int dateRange, string category)
@@ -61,10 +65,28 @@ namespace My_Expenses.Controllers
             var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
             var calculationData = productService.CalculateData(products);
 
+            var users = userService.GetAllEmployees(accountId);
             var dataModel = new HomePageCalculatedDataModel()
             {
                 Products = convertedList,
-                Data = ConvertTo.CalculatedDataModel(calculationData)
+                Data = ConvertTo.CalculatedDataModel(calculationData),
+                EmployeeUsernames = users.Select(x => x.Username).ToList()
+            };
+            return View(dataModel);
+        }
+        public IActionResult FilterByEmployee(string username)
+        {
+            var accountId = int.Parse(User.FindFirst("AccountId").Value);
+            var products = productService.FilterByEmployee(username);
+            var convertedList = products.Select(x => ConvertTo.HomePageModel(x)).ToList();
+            var calculationData = productService.CalculateData(products);
+
+            var users = userService.GetAllEmployees(accountId);
+            var dataModel = new HomePageCalculatedDataModel()
+            {
+                Products = convertedList,
+                Data = ConvertTo.CalculatedDataModel(calculationData),
+                EmployeeUsernames = users.Select(x => x.Username).ToList()
             };
             return View(dataModel);
         }

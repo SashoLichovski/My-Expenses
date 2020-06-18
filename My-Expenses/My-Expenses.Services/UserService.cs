@@ -38,12 +38,14 @@ namespace My_Expenses.Services
             accountRepository.AddAccount(account);
             var acc = accountRepository.GetLatest();
             user.AccountId = acc.Id;
+            user.DateCreated = DateTime.Now;
             userRepository.Add(user);
         }
         public void RegisterEmployee(User user, int accountId)
         {
             user.Role = "employee";
             user.AccountId = accountId;
+            user.DateCreated = DateTime.Now;
             userRepository.Add(user);
         }
 
@@ -61,10 +63,24 @@ namespace My_Expenses.Services
                 var userData = new UserOverviewData();
                 userData.EmployeeUsername = user.Username;
                 userData.Id = user.Id;
-                sales.Where(x => x.EmployeeUsername == user.Username)
-                    .Select(x => userData.TotalDailySales += x.DailySalesAmount);
-                products.Where(x => x.BoughtBy == user.Username)
-                    .Select(x => userData.TotalExpenses += x.Price);
+                userData.FirstSale = user.DateCreated;
+
+                foreach (var sale in sales)
+                {
+                    if (sale.EmployeeUsername == user.Username)
+                    {
+                        userData.TotalDailySales += sale.DailySalesAmount;
+                    }
+                }
+
+                foreach (var product in products)
+                {
+                    if (product.BoughtBy == user.Username)
+                    {
+                        userData.TotalExpenses += product.Price;
+                    }
+                }
+
                 list.Add(userData);
             }
             return list;
