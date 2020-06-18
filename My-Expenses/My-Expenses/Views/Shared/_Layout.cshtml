@@ -31,7 +31,7 @@
                             @if (User.FindFirst("Role").Value == "manager")
                             {
                                 <a class="dropdown-item" asp-controller="User" asp-action="RegisterEmployee">Add employee</a>
-                                <a class="dropdown-item" asp-controller="Sales" asp-action="EmployeeSalesOverview">Employee overview</a>
+                                <a class="dropdown-item" asp-controller="User" asp-action="EmployeeOverview">Employee overview</a>
                             }
                             <a class="dropdown-item" asp-controller="Account" asp-action="AccountOverview">My account</a>
                             <a class="dropdown-item" asp-controller="Auth" asp-action="SignOut">Sign out</a>

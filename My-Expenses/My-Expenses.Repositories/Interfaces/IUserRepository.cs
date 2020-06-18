@@ -10,5 +10,6 @@ namespace My_Expenses.Repositories.Interfaces
         User GetByUsername(string username);
         void Add(User user);
         User GetById(int userId);
+        List<User> GettAllEmployees(int accountId);
     }
 }

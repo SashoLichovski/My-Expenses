@@ -1,12 +1,15 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+<br />
+<h3>Products</h3>
+<br />
 <div class="scrollContainer">
     <table class="defaultTable">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Price</th>
-                <th>By employee</th>
+                <th>Added by</th>
                 <th>Date added</th>
                 <th>Category</th>
                 <th>Notes</th>
@@ -47,15 +50,22 @@
             </tr>
                 if (!string.IsNullOrEmpty(product.Note))
                 {
-                    <tr class="productNote">
-                        <td colspan="5">@product.Note</td>
-                        @if (User.Identity.Name == product.BoughtBy || User.FindFirst("Role").Value == "manager")
-                        {
-                            <td>
-                                <a asp-action="EditNote" asp-route-id="@product.Id">Edit note</a>
-                            </td>
-                        }
-                    </tr>
+        <tr class="productNote">
+            @if (User.FindFirst("Role").Value != "manager")
+            {
+                <td colspan="5">@product.Note</td>
+            }
+            else
+            {
+                <td colspan="6">@product.Note</td>
+            }
+            @if (User.Identity.Name == product.BoughtBy || User.FindFirst("Role").Value == "manager")
+            {
+                <td>
+                    <a asp-action="EditNote" asp-route-id="@product.Id">Edit note</a>
+                </td>
+            }
+        </tr>
                 }
             }
             

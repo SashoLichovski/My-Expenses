@@ -11,10 +11,14 @@ namespace My_Expenses.Controllers
     public class UserController : Controller
     {
         private readonly IUserService userService;
+        private readonly ISalesService salesService;
+        private readonly IProductService productService;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, ISalesService salesService, IProductService productService)
         {
             this.userService = userService;
+            this.salesService = salesService;
+            this.productService = productService;
         }
         public IActionResult RegisterEmployee()
         {
@@ -64,6 +68,17 @@ namespace My_Expenses.Controllers
         }
         public IActionResult SuccessfulRegister()
         {
+            return View();
+        }
+        [Authorize(Policy = "Role")]
+        public IActionResult EmployeeOverview()
+        {
+            var accountId = int.Parse(User.FindFirst("accountId").Value);
+            var allSales = salesService.GetAll(accountId);
+            var allProducts = productService.GetAllByAccountId(accountId);
+            var data = userService.EmployeeOverviewData(allSales, allProducts);
+            // Convert data to model
+            // Add to view and display
             return View();
         }
     }
